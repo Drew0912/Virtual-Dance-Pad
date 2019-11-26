@@ -1,3 +1,4 @@
+#Outdated no longer needed.
 from tkinter import *
 
 root = Tk()
