@@ -62,9 +62,9 @@ def main():
     cv2.setMouseCallback(cameraFeed.name, cameraFeed.Click) 
     while(True):
         cameraFeed.showFrame()
-        if cv2.waitKey(20) == 27:
+        if cv2.waitKey(20) == 27: #Press esc to exit.
                 break
     cv2.destroyAllWindows()
-    
+
 if __name__ == "__main__":
     main()
