@@ -3,17 +3,17 @@ import numpy as np #numpy needed for OpenCV
 
 class VidCapture:
     def __init__(self, video_source=0):
-        self.name = "Webcam" #Name of Capture
+        self.name = "WebcamFeed" #Name of Capture.
 
         self.point1 = () #Defining variables needed to draw rectangle.
         self.point2 = ()
         self.drawing = False
-        self.drawingfinish = False
+        self.drawingfinish = False #Flag to limit drawing of rectangle to once until reset.
 
-        self.vid=cv2.VideoCapture(video_source) #Open Video Source
-        cv2.namedWindow(self.name)
+        self.vid=cv2.VideoCapture(video_source) #Opens the webcam and mounts it.
+        cv2.namedWindow(self.name) #Opens a cv2 window.
 
-    def showFrame(self):
+    def showFrame(self): #Function to show Frame.
         ret, frame = self.vid.read()
         if self.point1 and self.point2:
             cv2.rectangle(frame, self.point1, self.point2, (255,255,255)) #Draw Rectangle
@@ -31,11 +31,11 @@ class VidCapture:
             cv2.line(frame, (self.a, self.point1[1]), (self.a, self.point2[1]), (255,255,255))
             cv2.line(frame, (self.b, self.point1[1]), (self.b, self.point2[1]), (255,255,255))
             cv2.line(frame, (self.point1[0], self.c), (self.point2[0], self.c), (255,255,255))
-            cv2.line(frame, (self.point1[0], self.d), (self.point2[0], self.d), (255,255,255))
+            cv2.line(frame, (self.point1[0], self.d), (self.point2[0], self.d), (255,255,255)) #Splits into 3x3 grid
 
         cv2.imshow(self.name, frame)
    
-    def Click(self, event, x, y, flags, param):
+    def Click(self, event, x, y, flags, param): #Function that happens on MouseCallback.
         global point1, point2, drawing, drawingcounter
         if self.drawingfinish is False:
             if event == cv2.EVENT_LBUTTONDOWN:
@@ -51,7 +51,7 @@ class VidCapture:
         if event == cv2.EVENT_RBUTTONDOWN: #Testing purpose since no GUI.
             self.Reset()        
 
-    def Reset(self):
+    def Reset(self): #Resets 3x3 grid and flag.
         global point1, point2, drawingcounter
         self.point1 = ()
         self.point2 = ()
@@ -65,5 +65,6 @@ def main():
         if cv2.waitKey(20) == 27:
                 break
     cv2.destroyAllWindows()
+    
 if __name__ == "__main__":
     main()
