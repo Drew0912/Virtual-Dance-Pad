@@ -1,6 +1,7 @@
 import cv2 #OpenCV
 import numpy as np #numpy needed for OpenCV
 
+
 class VidCapture:
     def __init__(self, video_source=0):
         self.name = "WebcamFeed" #Name of Capture.
@@ -55,15 +56,28 @@ class VidCapture:
         global point1, point2, drawingcounter
         self.point1 = ()
         self.point2 = ()
-        self.drawingfinish = False   
+        self.drawingfinish = False
+
+    def debug():
+        print("debug")
+
+    def Resetout():
+        self.Reset()
+
         
 def main():
+    global camerafeed
     cameraFeed = VidCapture() 
-    cv2.setMouseCallback(cameraFeed.name, cameraFeed.Click) 
+    cv2.setMouseCallback(cameraFeed.name, cameraFeed.Click)
+    global close
+    close = False 
     while(True):
         cameraFeed.showFrame()
         if cv2.waitKey(20) == 27: #Press esc to exit.
                 break
+        if close:
+            close = not close
+            break    
     cv2.destroyAllWindows()
 
 if __name__ == "__main__":
