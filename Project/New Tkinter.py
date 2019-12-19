@@ -96,7 +96,7 @@ class Calibration:
             self.Adjust = Adjust(self.AdjustWindow)
 
         def Reset():
-            cameraFeed.Reset() #IDK Code
+            cameraFeed.Reset() #IDK Code, works
     
 
         self.Label = tk.Label(root, text="Click on the webcam feed to create 2 corners, \n one in the top left and the other in the botton right of where you want the 3x3 grid.")
