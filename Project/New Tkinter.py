@@ -12,20 +12,25 @@ class MainWindow:
         self.master.title("Main")
         self.master.resizable(0,0)
 
-        def StartStop():
+        self.WebcamOpen = False #Bool so Calibration can only be opened when webcam is open.
+
+        def StartStop(): #Add code to start program as controller (macros?).
             if self.StartStopButton["text"] == "Start":
                 self.StartStopButton["text"] = "Stop"
             else:
                 self.StartStopButton["text"] = "Start"
+        
         def Help():
             url = 'file://' + os.path.realpath('index.html')
             webbrowser.open(url)
 
         def CalibrationWindow():
-            self.newwindow = tk.Toplevel(self.master)
-            self.app = Calibration(self.newwindow)
+            if self.WebcamOpen:
+                self.newwindow = tk.Toplevel(self.master)
+                self.app = Calibration(self.newwindow)
 
         def Webcam():
+            self.WebcamOpen = True
             global cameraFeed
             cameraFeed = VCCB.VidCapture() 
             cv2.setMouseCallback(cameraFeed.name, cameraFeed.Click)
@@ -37,22 +42,20 @@ class MainWindow:
                     break
                 if close:
                     close = not close
+                    self.WebcamOpen = not self.WebcamOpen
                     break    
             cv2.destroyAllWindows()
-
-
-            #VCCB.main() #change so creates class instead of run main.
 
         def WebcamClick(): #Function to load Webcam function.
             if self.DisplayButton["text"] == "Open Webcam":
                 T1.start()
-                self.DisplayButton["text"] = "Close Webcam"
+                self.DisplayButton["text"] = "Close Webcam. \n Requires restart after close."
             else:
-                #VCCB.close = not VCCB.close
-                self.DisplayButton["text"] = "Open Webcam"
+                global close
+                close = not close
+                self.DisplayButton["text"] = "Restart program to open Webcam"
                           
-
-
+        #Threading
         T1 = threading.Thread(target=Webcam) #thread for OpenCV
         T1.daemon = True #Close Webcam if GUi is closed
         
@@ -99,7 +102,7 @@ class Calibration:
             cameraFeed.Reset() #IDK Code, works
     
 
-        self.Label = tk.Label(root, text="Click on the webcam feed to create 2 corners, \n one in the top left and the other in the botton right of where you want the 3x3 grid.")
+        self.Label = tk.Label(root, text="Click on the webcam feed to create 2 corners. \n One in the top left and the other in the botton right of where you want the 3x3 grid.")
         self.Label.grid(row=0, column=0, columnspan=2)
         self.AdjustButton = tk.Button(root, text="Adjust", width=15, height=5, command=OpenAdjust)
         self.AdjustButton.grid(row=2, column=1, padx=(0,10), sticky=tk.W+tk.E+tk.N+tk.S, pady=(20,0))
@@ -126,30 +129,47 @@ class Adjust:
 
         def Back():
             self.root.destroy()
-            self.root.update() #???    
+            self.root.update() #???
+
+        def LeftCornerUp():
+            cameraFeed.LeftCornerUp()
+        def LeftCornerDown():
+            cameraFeed.LeftCornerDown()
+        def LeftCornerRight():
+            cameraFeed.LeftCornerRight()
+        def LeftCornerLeft():
+            cameraFeed.LeftCornerLeft()
+        def RightCornerUp():
+            cameraFeed.RightCornerUp()
+        def RightCornerDown():
+            cameraFeed.RightCornerDown()
+        def RightCornerRight():
+            cameraFeed.RightCornerRight()
+        def RightCornerLeft():
+            cameraFeed.RightCornerLeft()                        
 
         self.FirstLabel = tk.Label(root, text="Top Left Corner:")
         self.FirstLabel.grid(row=0, column=0, columnspan=4, padx=10, pady=10, sticky=tk.W+tk.S)
 
-        self.LeftIncreaseY = tk.Button(root, text="UP", width=8, height=2)
+        self.LeftIncreaseY = tk.Button(root, text="UP", width=8, height=2, command=LeftCornerUp)
         self.LeftIncreaseY.grid(row=1, column=0, padx=(10,0))
-        self.LeftDecreaseY = tk.Button(root, text="DOWN", width=8, height=2)
+        self.LeftDecreaseY = tk.Button(root, text="DOWN", width=8, height=2, command=LeftCornerDown)
         self.LeftDecreaseY.grid(row=1, column=1)
-        self.LeftIncreaseX = tk.Button(root, text="RIGHT", width=8, height=2)
+        self.LeftIncreaseX = tk.Button(root, text="RIGHT", width=8, height=2, command=LeftCornerRight)
         self.LeftIncreaseX.grid(row=1, column=2)
-        self.LeftDecreaseX = tk.Button(root, text="LEFT", width=8, height=2)
+        self.LeftDecreaseX = tk.Button(root, text="LEFT", width=8, height=2, command=LeftCornerLeft)
         self.LeftDecreaseX.grid(row=1, column=3, padx=(0,10))
 
         self.SecondLabel = tk.Label(root, text="Bottom Right Corner:")
         self.SecondLabel.grid(row=2, column=0, columnspan=4, padx=10, pady=10, sticky=tk.W+tk.S)
 
-        self.RightIncreaseY = tk.Button(root, text="UP", width=8, height=2)
+        self.RightIncreaseY = tk.Button(root, text="UP", width=8, height=2, command=RightCornerUp)
         self.RightIncreaseY.grid(row=3, column=0, padx=(10,0))
-        self.RightDecreaseY = tk.Button(root, text="DOWN", width=8, height=2)
+        self.RightDecreaseY = tk.Button(root, text="DOWN", width=8, height=2, command=RightCornerDown)
         self.RightDecreaseY.grid(row=3, column=1)
-        self.RightIncreaseX = tk.Button(root, text="RIGHT", width=8, height=2)
+        self.RightIncreaseX = tk.Button(root, text="RIGHT", width=8, height=2, command=RightCornerRight)
         self.RightIncreaseX.grid(row=3, column=2)
-        self.RightDecreaseX = tk.Button(root, text="LEFT", width=8, height=2)
+        self.RightDecreaseX = tk.Button(root, text="LEFT", width=8, height=2, command=RightCornerLeft)
         self.RightDecreaseX.grid(row=3, column=3, padx=(0,10))
 
         self.HelpButton = tk.Button(root, text="Help", width=8, height=2, command=Help)

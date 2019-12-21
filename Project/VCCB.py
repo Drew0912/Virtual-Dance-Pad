@@ -58,11 +58,42 @@ class VidCapture:
         self.point2 = ()
         self.drawingfinish = False
 
-    def debug():
-        print("debug")
-
     def Resetout():
         self.Reset()
+
+    def LeftCornerUp(self):
+        global point1
+        self.point1 = (self.point1[0], self.point1[1] - 1)
+
+    def LeftCornerDown(self):
+        global point1
+        self.point1 = (self.point1[0], self.point1[1] + 1)
+
+    def LeftCornerLeft(self):
+        global point1
+        self.point1 = (self.point1[0] - 1, self.point1[1])
+
+    def LeftCornerRight(self):
+        global point1
+        self.point1 = (self.point1[0] + 1, self.point1[1])
+
+    def RightCornerUp(self):
+        global point2
+        self.point2 = (self.point2[0], self.point2[1] - 1)
+
+    def RightCornerDown(self):
+        global point2
+        self.point2 = (self.point2[0], self.point2[1] + 1)
+
+    def RightCornerLeft(self):
+        global point2
+        self.point2 = (self.point2[0] - 1, self.point2[1])
+
+    def RightCornerRight(self):
+        global point2
+        self.point2 = (self.point2[0] + 1, self.point2[1])                
+        
+
 
         
 def main():
