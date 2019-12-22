@@ -10,6 +10,8 @@ from PIL import Image, ImageTk
 
 import time
 
+from tkinter import StringVar
+
 class MainWindow:
     def __init__(self, master):
         self.master = master
@@ -89,7 +91,7 @@ class MainWindow:
 
         self.master.mainloop()
 
-class MainCalibration():
+class MainCalibration:
     def __init__(self, root):
         self.root = root
         self.root.title("Main Calibration")
@@ -110,11 +112,20 @@ class MainCalibration():
             self.root.destroy()
             self.root.update() #???
 
+        def ConfigureWindow():
+            self.ConfigureWindow = tk.Toplevel(self.root)
+            self.Configure = Configure(self.ConfigureWindow)
+
+        def SensitivityWindow():
+            self.SensitivityWindow = tk.Toplevel(self.root)
+            self.Sensitivity = Sensitivity(self.SensitivityWindow)
 
 
-        self.ConfigureButton = tk.Button(root, text="Configure", width=15, height=5)
+
+
+        self.ConfigureButton = tk.Button(root, text="Configure", width=15, height=5, command=ConfigureWindow)
         self.ConfigureButton.grid(row=1, column=1)
-        self.SensitivityButton = tk.Button(root, text="Sensitivity", width=15, height=5)
+        self.SensitivityButton = tk.Button(root, text="Sensitivity", width=15, height=5, command=SensitivityWindow)
         self.SensitivityButton.grid(row=2, column=0)   
         self.SetupButton = tk.Button(root, text="Setup", width=15, height=5, command=Setup)
         self.SetupButton.grid(row=2, column=1)
@@ -293,9 +304,111 @@ class ControlPictureConfirmWindow:
         self.HelpButton = tk.Button(root, text="Help", width=15, height=5, command=Help)
         self.HelpButton.grid(row=3, column=2)
 
+class Configure:
+    def __init__(self, root):
+        self.root = root
+        self.root.title("Configure")
+        self.root.resizable(0,0)
 
+        self.FrontLabel = tk.Label(root, text="Front:")
+        self.FrontLabel.grid(row=0, column=0)
+        self.FrontSelect = ttk.Combobox(root, width=15, state='readonly',
+                                         values=[
+                                             "1",
+                                             "2",
+                                             "3",
+                                             "4",])
+        self.FrontSelect.grid(row=1, column=0)
+        self.FrontSelect.current(0)
 
-        
+        self.RightLabel = tk.Label(root, text="Right:")
+        self.RightLabel.grid(row=0, column=1)
+        self.RightSelect = ttk.Combobox(root, width=15, state='readonly',
+                                         values=[
+                                             "1",
+                                             "2",
+                                             "3",
+                                             "4",])
+        self.RightSelect.grid(row=1, column=1)
+        self.RightSelect.current(1)
+
+        self.LeftLabel = tk.Label(root, text="Left:")
+        self.LeftLabel.grid(row=2, column=0)
+        self.LeftSelect = ttk.Combobox(root, width=15, state='readonly',
+                                         values=[
+                                             "1",
+                                             "2",
+                                             "3",
+                                             "4",])
+        self.LeftSelect.grid(row=3, column=0)
+        self.LeftSelect.current(2)
+
+        self.BackLabel = tk.Label(root, text="Back:")
+        self.BackLabel.grid(row=2, column=1)
+        self.BackSelect = ttk.Combobox(root, width=15, state='readonly',
+                                         values=[
+                                             "1",
+                                             "2",
+                                             "3",
+                                             "4",])
+        self.BackSelect.grid(row=3, column=1)
+        self.BackSelect.current(3)
+
+class Sensitivity:
+    def __init__(self, root):
+        self.root = root
+        self.root.title("Sensitivity")
+        self.root.resizable(0,0)
+
+        self.BoxLabel = tk.Label(root, text="Box:")
+        self.BoxLabel.grid(row=0, column=0)
+
+        self.OneLabel = tk.Label(root, text="1")
+        self.OneLabel.grid(row=0, column=1)
+        self.TwoLabel = tk.Label(root, text="2")
+        self.TwoLabel.grid(row=0, column=2)
+        self.ThreeLabel = tk.Label(root, text="3")
+        self.ThreeLabel.grid(row=0, column=3)
+        self.FourLabel = tk.Label(root, text="4")
+        self.FourLabel.grid(row=0, column=4)
+
+        self.text = "..." #String variable for text
+
+        self.DetectionLabel = tk.Label(root, text="Detection Value:")
+        self.DetectionLabel.grid(row=1, column=0)
+
+        self.DetectionOneLabel = tk.Label(root, text=self.text, borderwidth=2, relief='ridge')
+        self.DetectionOneLabel.grid(row=1, column=1)
+        self.DetectionTwoLabel = tk.Label(root, text=self.text, borderwidth=2, relief='ridge')
+        self.DetectionTwoLabel.grid(row=1, column=2)
+        self.DetectionThreeLabel = tk.Label(root, text=self.text, borderwidth=2, relief='ridge')
+        self.DetectionThreeLabel.grid(row=1, column=3)
+        self.DetectionFourLabel = tk.Label(root, text=self.text, borderwidth=2, relief='ridge')
+        self.DetectionFourLabel.grid(row=1, column=4)
+
+        self.UpperLimitLabel = tk.Label(root, text="Upper Limit:")
+        self.UpperLimitLabel.grid(row=2, column=0)
+
+        self.UpperOneEntryText = StringVar()
+        self.UpperOneEntry = tk.Entry(root, textvariable=self.UpperOneEntryText)
+        self.UpperOneEntryText.set("1")
+        self.UpperOneEntry.grid(row=2, column=1)
+
+        self.UpperTwoEntryText = StringVar()
+        self.UpperTwoEntry = tk.Entry(root, textvariable=self.UpperTwoEntryText)
+        self.UpperTwoEntryText.set("2")
+        self.UpperTwoEntry.grid(row=2, column=2)
+
+        self.UpperThreeEntryText = StringVar()
+        self.UpperThreeEntry = tk.Entry(root, textvariable=self.UpperThreeEntryText)
+        self.UpperThreeEntryText.set("3")
+        self.UpperThreeEntry.grid(row=2, column=3)
+
+        self.UpperFourEntryText = StringVar()
+        self.UpperFourEntry = tk.Entry(root, textvariable=self.UpperFourEntryText)
+        self.UpperFourEntryText.set("4")
+        self.UpperFourEntry.grid(row=2, column=4)
+
 
 
 
