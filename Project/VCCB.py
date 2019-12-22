@@ -11,10 +11,13 @@ class VidCapture:
         self.drawing = False
         self.drawingfinish = False #Flag to limit drawing of rectangle to once until reset.
 
+        self.takepicture = False
+
         self.vid=cv2.VideoCapture(video_source) #Opens the webcam and mounts it.
         cv2.namedWindow(self.name) #Opens a cv2 window.
+        
 
-    def showFrame(self): #Function to show Frame.
+    def showFrame(self): #Function to show Frame. Always in a While True loop.
         ret, frame = self.vid.read()
         if self.point1 and self.point2:
             cv2.rectangle(frame, self.point1, self.point2, (255,255,255)) #Draw Rectangle
@@ -34,6 +37,11 @@ class VidCapture:
             cv2.line(frame, (self.point1[0], self.c), (self.point2[0], self.c), (255,255,255))
             cv2.line(frame, (self.point1[0], self.d), (self.point2[0], self.d), (255,255,255)) #Splits into 3x3 grid
 
+        if self.takepicture:
+            filename = "Control_picture.jpg"
+            cv2.imwrite(filename, frame)
+            self.takepicture = not self.takepicture    
+
         cv2.imshow(self.name, frame)
    
     def Click(self, event, x, y, flags, param): #Function that happens on MouseCallback.
@@ -50,7 +58,8 @@ class VidCapture:
                 if self.drawing is True:
                     self.point2 = (x,y)
         if event == cv2.EVENT_RBUTTONDOWN: #Testing purpose since no GUI.
-            self.Reset()        
+            self.Reset()
+            self.TakePicture()        
 
     def Reset(self): #Resets 3x3 grid and flag.
         global point1, point2, drawingcounter
@@ -64,38 +73,31 @@ class VidCapture:
     def LeftCornerUp(self):
         global point1
         self.point1 = (self.point1[0], self.point1[1] - 1)
-
     def LeftCornerDown(self):
         global point1
         self.point1 = (self.point1[0], self.point1[1] + 1)
-
     def LeftCornerLeft(self):
         global point1
         self.point1 = (self.point1[0] - 1, self.point1[1])
-
     def LeftCornerRight(self):
         global point1
         self.point1 = (self.point1[0] + 1, self.point1[1])
-
     def RightCornerUp(self):
         global point2
         self.point2 = (self.point2[0], self.point2[1] - 1)
-
     def RightCornerDown(self):
         global point2
         self.point2 = (self.point2[0], self.point2[1] + 1)
-
     def RightCornerLeft(self):
         global point2
         self.point2 = (self.point2[0] - 1, self.point2[1])
-
     def RightCornerRight(self):
         global point2
-        self.point2 = (self.point2[0] + 1, self.point2[1])                
-        
+        self.point2 = (self.point2[0] + 1, self.point2[1])     
 
-
-        
+    def TakePicture(self):
+        self.takepicture = not self.takepicture              
+               
 def main():
     global camerafeed
     cameraFeed = VidCapture() 

@@ -6,6 +6,10 @@ import cv2
 import VCCB
 import threading
 
+from PIL import Image, ImageTk
+
+import time
+
 class MainWindow:
     def __init__(self, master):
         self.master = master
@@ -24,10 +28,13 @@ class MainWindow:
             url = 'file://' + os.path.realpath('index.html')
             webbrowser.open(url)
 
-        def CalibrationWindow():
+        def CalibrationWindow(): #Update to use new Main Calibration window
             if self.WebcamOpen:
                 self.newwindow = tk.Toplevel(self.master)
-                self.app = Calibration(self.newwindow)
+                self.app = MainCalibration(self.newwindow)
+            else:
+                self.Message["text"] = "Open Webcam first."
+
 
         def Webcam():
             self.WebcamOpen = True
@@ -68,17 +75,53 @@ class MainWindow:
                                              "3",])
         self.WebcamSelect.grid(row=0, column=0, columnspan=2, pady=(20,10))
         self.WebcamSelect.current(0)
+        self.Message = tk.Label(master, text="") #Error message.
+        self.Message.grid(row=1, column=0, columnspan=2)
         self.DisplayButton = tk.Button(master, text="Open Webcam", width=30, height=5, command=WebcamClick)
-        self.DisplayButton.grid(row=1, column=0, columnspan=2)
+        self.DisplayButton.grid(row=2, column=0, columnspan=2)
         self.StartStopButton = tk.Button(master, text="Start", width=30, height=5, command=StartStop)
-        self.StartStopButton.grid(row=3, column=0, columnspan=2,
+        self.StartStopButton.grid(row=4, column=0, columnspan=2,
                                   sticky=tk.W+tk.E+tk.N+tk.S, pady=(0,20), padx=10)
         self.HelpButton = tk.Button(master, text="Help", height=5, command=Help)
-        self.HelpButton.grid(row=2, column=1, sticky=tk.W+tk.E+tk.N+tk.S, padx=(0,10))
+        self.HelpButton.grid(row=3, column=1, sticky=tk.W+tk.E+tk.N+tk.S, padx=(0,10))
         self.CalibrateButton = tk.Button(master, text="Calibrate/Setup", height=5, command=CalibrationWindow)
-        self.CalibrateButton.grid(row=2, column=0, sticky=tk.W+tk.E+tk.N+tk.S, padx=(10,0))
+        self.CalibrateButton.grid(row=3, column=0, sticky=tk.W+tk.E+tk.N+tk.S, padx=(10,0))
 
         self.master.mainloop()
+
+class MainCalibration():
+    def __init__(self, root):
+        self.root = root
+        self.root.title("Main Calibration")
+        self.root.resizable(0,0)
+
+        self.Label = tk.Label(root, text="Go through Setup before pressing any other button.")
+        self.Label.grid(row=0, column=0, columnspan=2)
+
+        def Setup():
+            self.SetupWindow = tk.Toplevel(self.root)
+            self.Setup = Calibration(self.SetupWindow)
+
+        def Help():
+            url = 'file://' + os.path.realpath('index.html')
+            webbrowser.open(url)
+
+        def Finish():
+            self.root.destroy()
+            self.root.update() #???
+
+
+
+        self.ConfigureButton = tk.Button(root, text="Configure", width=15, height=5)
+        self.ConfigureButton.grid(row=1, column=1)
+        self.SensitivityButton = tk.Button(root, text="Sensitivity", width=15, height=5)
+        self.SensitivityButton.grid(row=2, column=0)   
+        self.SetupButton = tk.Button(root, text="Setup", width=15, height=5, command=Setup)
+        self.SetupButton.grid(row=2, column=1)
+        self.FinishButton = tk.Button(root, text="Finish", width=15, height=5, command=Finish)
+        self.FinishButton.grid(row=3, column=0)
+        self.HelpButton = tk.Button(root, text="Help", width=15, height=5, command=Help)
+        self.HelpButton.grid(row=3, column=1)     
                 
 class Calibration:
     def __init__(self, root):
@@ -100,6 +143,10 @@ class Calibration:
 
         def Reset():
             cameraFeed.Reset() #IDK Code, works
+
+        def Next():
+            self.ControlWindow = tk.Toplevel(self.root)
+            self.Control = ControlPictureWindow(self.ControlWindow)    
     
 
         self.Label = tk.Label(root, text="Click on the webcam feed to create 2 corners. \n One in the top left and the other in the botton right of where you want the 3x3 grid.")
@@ -110,7 +157,7 @@ class Calibration:
         self.ResetButton.grid(row=3, column=0, padx=(10,0), sticky=tk.W+tk.E+tk.N+tk.S)
         self.BackButton = tk.Button(root, text="Back", command=Back, width=15, height=5)
         self.BackButton.grid(row=3, column=1, padx=(0,10), sticky=tk.W+tk.E+tk.N+tk.S)
-        self.NextButton = tk.Button(root, text="Next", width=15, height=5)
+        self.NextButton = tk.Button(root, text="Next", width=15, height=5, command=Next)
         self.NextButton.grid(row=4, column=0, padx=(10,0), sticky=tk.W+tk.E+tk.N+tk.S, pady=(0,20))
         self.HelpButton = tk.Button(root, text="Help", command=Help, width=15, height=5)
         self.HelpButton.grid(row=4, column=1, padx=(0,10), sticky=tk.W+tk.E+tk.N+tk.S, pady=(0,20))
@@ -172,14 +219,90 @@ class Adjust:
         self.RightDecreaseX = tk.Button(root, text="LEFT", width=8, height=2, command=RightCornerLeft)
         self.RightDecreaseX.grid(row=3, column=3, padx=(0,10))
 
+        self.ResetMessage = tk.Label(root, text="Press the reset button to remove the 3x3 grid.")
+        self.ResetMessage.grid(row=4, column=0, columnspan=4)
+
         self.HelpButton = tk.Button(root, text="Help", width=8, height=2, command=Help)
-        self.HelpButton.grid(row=4, column=2, pady=10)
+        self.HelpButton.grid(row=5, column=2, pady=10)
         self.BackButton = tk.Button(root, text="Back", width=8, height=2, command=Back)
-        self.BackButton.grid(row=4, column=3, pady=10, padx=(0,10))
+        self.BackButton.grid(row=5, column=3, pady=10, padx=(0,10))
+
+class ControlPictureWindow:
+    def __init__ (self, root):
+        self.root = root
+        self.root.title("Control Picture")
+        self.root.resizable(0,0)
+
+
+        def Back():
+            self.root.destroy()
+            self.root.update() #???
+
+        def Help():
+            url = 'file://' + os.path.realpath('index.html') #change url
+            webbrowser.open(url)
+
+        def TakePicture():
+            cameraFeed.TakePicture()
+
+            time.sleep(2) #Delay to save photo before displaying   
+            self.ConfirmWindow = tk.Toplevel(self.root)
+            self.Confirm = ControlPictureConfirmWindow(self.ConfirmWindow)        
+
+        self.Label = tk.Label(root, text="Makes sure that the image displayed on the webcam feed\n is clear and that the user is standing on the center box of the 3x3 grid.")
+        self.Label.grid(row=0, column=0, columnspan=2)
+        self.BackButton = tk.Button(root, text="Back", width=15, height=5, command=Back)
+        self.BackButton.grid(row=1, column=1)
+        self.HelpButton = tk.Button(root, text="Help", width=15, height=5, command=Help)
+        self.HelpButton.grid(row=2, column=1)
+        self.TakePictureButton = tk.Button(root, text="Take Picture", width=15, height=5, command=TakePicture)
+        self.TakePictureButton.grid(row=2, column=0)
+
+class ControlPictureConfirmWindow:
+    def __init__(self, root):
+        self.root = root
+        self.root.title("Confirm")
+        self.root.resizable(0,0)
+
+        self.img = ImageTk.PhotoImage(Image.open("Control_picture.jpg"))
+
+        self.panel = tk.Label(root, image = self.img)
+        self.panel.image = self.img
+        self.panel.grid(row=0, column=0, rowspan=4)
+
+        def Help():
+            url = 'file://' + os.path.realpath('index.html') #change url
+            webbrowser.open(url)
+
+        def Retake():
+            self.root.destroy()
+            self.root.update() #???
+
+        def Yes():
+            self.TextLabel["text"] = "Close all windows but Main Calibration and Main Window"
+   
+            
+        self.TextLabel = tk.Label(root, text="")
+        self.TextLabel.grid(row=0, column=1, columnspan=2)    
+        self.Label = tk.Label(root, text="Is this Control picture suitable?")
+        self.Label.grid(row=1, column=1, columnspan=2)
+        self.RetakeButton = tk.Button(root, text="Retake", width=15, height=5, command=Retake)
+        self.RetakeButton.grid(row=2, column=2)
+        self.YesButton = tk.Button(root, text="Yes", width=15, height=5, command=Yes)
+        self.YesButton.grid(row=3, column=1)
+        self.HelpButton = tk.Button(root, text="Help", width=15, height=5, command=Help)
+        self.HelpButton.grid(row=3, column=2)
+
+
+
+        
+
+
 
 def main():
     root = tk.Tk()
     app = MainWindow(root)
+    
 
 if __name__ =='__main__':
     main()    
