@@ -393,29 +393,44 @@ class Sensitivity:
         self.UpperOneEntry = tk.Entry(root, textvariable=self.UpperOneEntryText)
         self.UpperOneEntryText.set("1")
         self.UpperOneEntry.grid(row=2, column=1)
-
         self.UpperTwoEntryText = StringVar()
         self.UpperTwoEntry = tk.Entry(root, textvariable=self.UpperTwoEntryText)
         self.UpperTwoEntryText.set("2")
         self.UpperTwoEntry.grid(row=2, column=2)
-
         self.UpperThreeEntryText = StringVar()
         self.UpperThreeEntry = tk.Entry(root, textvariable=self.UpperThreeEntryText)
         self.UpperThreeEntryText.set("3")
         self.UpperThreeEntry.grid(row=2, column=3)
-
         self.UpperFourEntryText = StringVar()
         self.UpperFourEntry = tk.Entry(root, textvariable=self.UpperFourEntryText)
         self.UpperFourEntryText.set("4")
         self.UpperFourEntry.grid(row=2, column=4)
 
+        self.LowerLimitLabel = tk.Label(root, text="Lower Limit:")
+        self.LowerLimitLabel.grid(row=3, column=0)
 
+        self.LowerOneEntryText = StringVar()
+        self.LowerOneEntry = tk.Entry(root, textvariable=self.LowerOneEntryText)
+        self.LowerOneEntryText.set("1")
+        self.LowerOneEntry.grid(row=3, column=1)
+        self.LowerTwoEntryText = StringVar()
+        self.LowerTwoEntry = tk.Entry(root, textvariable=self.LowerTwoEntryText)
+        self.LowerTwoEntryText.set("2")
+        self.LowerTwoEntry.grid(row=3, column=2)
+        self.LowerThreeEntryText = StringVar()
+        self.LowerThreeEntry = tk.Entry(root, textvariable=self.LowerThreeEntryText)
+        self.LowerThreeEntryText.set("3")
+        self.LowerThreeEntry.grid(row=3, column=3)
+        self.LowerFourEntryText = StringVar()
+        self.LowerFourEntry = tk.Entry(root, textvariable=self.LowerFourEntryText)
+        self.LowerFourEntryText.set("4")
+        self.LowerFourEntry.grid(row=3, column=4)
 
 
 def main():
     root = tk.Tk()
     app = MainWindow(root)
     
-
+    
 if __name__ =='__main__':
     main()    
