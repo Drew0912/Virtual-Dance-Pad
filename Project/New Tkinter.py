@@ -10,7 +10,7 @@ from PIL import Image, ImageTk
 
 import time
 
-from tkinter import StringVar
+from tkinter import StringVar #String Variable for Entry widget.
 
 class MainWindow:
     def __init__(self, master):
@@ -98,7 +98,7 @@ class MainCalibration:
         self.root.resizable(0,0)
 
         self.Label = tk.Label(root, text="Go through Setup before pressing any other button.")
-        self.Label.grid(row=0, column=0, columnspan=2)
+        self.Label.grid(row=0, column=0, columnspan=2, pady=(5,10), padx=10)
 
         def Setup():
             self.SetupWindow = tk.Toplevel(self.root)
@@ -120,19 +120,22 @@ class MainCalibration:
             self.SensitivityWindow = tk.Toplevel(self.root)
             self.Sensitivity = Sensitivity(self.SensitivityWindow)
 
+        def test():
+            cameraFeed.debug()    
 
-
+        self.debugButton = tk.Button(root, text="Debug", command=test)
+        self.debugButton.grid(row=1, column=0, padx=(10,0), sticky=tk.W+tk.E+tk.N+tk.S)    
 
         self.ConfigureButton = tk.Button(root, text="Configure", width=15, height=5, command=ConfigureWindow)
-        self.ConfigureButton.grid(row=1, column=1)
+        self.ConfigureButton.grid(row=1, column=1, padx=(0,10), sticky=tk.W+tk.E+tk.N+tk.S)
         self.SensitivityButton = tk.Button(root, text="Sensitivity", width=15, height=5, command=SensitivityWindow)
-        self.SensitivityButton.grid(row=2, column=0)   
+        self.SensitivityButton.grid(row=2, column=0, padx=(10,0), sticky=tk.W+tk.E+tk.N+tk.S)   
         self.SetupButton = tk.Button(root, text="Setup", width=15, height=5, command=Setup)
-        self.SetupButton.grid(row=2, column=1)
+        self.SetupButton.grid(row=2, column=1, padx=(0,10), sticky=tk.W+tk.E+tk.N+tk.S)
         self.FinishButton = tk.Button(root, text="Finish", width=15, height=5, command=Finish)
-        self.FinishButton.grid(row=3, column=0)
+        self.FinishButton.grid(row=3, column=0, padx=(10,0), pady=(0,20), sticky=tk.W+tk.E+tk.N+tk.S)
         self.HelpButton = tk.Button(root, text="Help", width=15, height=5, command=Help)
-        self.HelpButton.grid(row=3, column=1)     
+        self.HelpButton.grid(row=3, column=1, padx=(0,10), pady=(0,20), sticky=tk.W+tk.E+tk.N+tk.S)     
                 
 class Calibration:
     def __init__(self, root):
@@ -161,7 +164,7 @@ class Calibration:
     
 
         self.Label = tk.Label(root, text="Click on the webcam feed to create 2 corners. \n One in the top left and the other in the botton right of where you want the 3x3 grid.")
-        self.Label.grid(row=0, column=0, columnspan=2)
+        self.Label.grid(row=0, column=0, columnspan=2, pady=(5,0))
         self.AdjustButton = tk.Button(root, text="Adjust", width=15, height=5, command=OpenAdjust)
         self.AdjustButton.grid(row=2, column=1, padx=(0,10), sticky=tk.W+tk.E+tk.N+tk.S, pady=(20,0))
         self.ResetButton = tk.Button(root, text="Reset", width=15, height=5, command=Reset)
@@ -209,33 +212,33 @@ class Adjust:
         self.FirstLabel = tk.Label(root, text="Top Left Corner:")
         self.FirstLabel.grid(row=0, column=0, columnspan=4, padx=10, pady=10, sticky=tk.W+tk.S)
 
-        self.LeftIncreaseY = tk.Button(root, text="UP", width=8, height=2, command=LeftCornerUp)
+        self.LeftIncreaseY = tk.Button(root, text="UP", width=12, height=3, command=LeftCornerUp)
         self.LeftIncreaseY.grid(row=1, column=0, padx=(10,0))
-        self.LeftDecreaseY = tk.Button(root, text="DOWN", width=8, height=2, command=LeftCornerDown)
+        self.LeftDecreaseY = tk.Button(root, text="DOWN", width=12, height=3, command=LeftCornerDown)
         self.LeftDecreaseY.grid(row=1, column=1)
-        self.LeftIncreaseX = tk.Button(root, text="RIGHT", width=8, height=2, command=LeftCornerRight)
+        self.LeftIncreaseX = tk.Button(root, text="RIGHT", width=12, height=3, command=LeftCornerRight)
         self.LeftIncreaseX.grid(row=1, column=2)
-        self.LeftDecreaseX = tk.Button(root, text="LEFT", width=8, height=2, command=LeftCornerLeft)
+        self.LeftDecreaseX = tk.Button(root, text="LEFT", width=12, height=3, command=LeftCornerLeft)
         self.LeftDecreaseX.grid(row=1, column=3, padx=(0,10))
 
         self.SecondLabel = tk.Label(root, text="Bottom Right Corner:")
         self.SecondLabel.grid(row=2, column=0, columnspan=4, padx=10, pady=10, sticky=tk.W+tk.S)
 
-        self.RightIncreaseY = tk.Button(root, text="UP", width=8, height=2, command=RightCornerUp)
+        self.RightIncreaseY = tk.Button(root, text="UP", width=12, height=3, command=RightCornerUp)
         self.RightIncreaseY.grid(row=3, column=0, padx=(10,0))
-        self.RightDecreaseY = tk.Button(root, text="DOWN", width=8, height=2, command=RightCornerDown)
+        self.RightDecreaseY = tk.Button(root, text="DOWN", width=12, height=3, command=RightCornerDown)
         self.RightDecreaseY.grid(row=3, column=1)
-        self.RightIncreaseX = tk.Button(root, text="RIGHT", width=8, height=2, command=RightCornerRight)
+        self.RightIncreaseX = tk.Button(root, text="RIGHT", width=12, height=3, command=RightCornerRight)
         self.RightIncreaseX.grid(row=3, column=2)
-        self.RightDecreaseX = tk.Button(root, text="LEFT", width=8, height=2, command=RightCornerLeft)
+        self.RightDecreaseX = tk.Button(root, text="LEFT", width=12, height=3, command=RightCornerLeft)
         self.RightDecreaseX.grid(row=3, column=3, padx=(0,10))
 
         self.ResetMessage = tk.Label(root, text="Press the reset button to remove the 3x3 grid.")
-        self.ResetMessage.grid(row=4, column=0, columnspan=4)
+        self.ResetMessage.grid(row=4, column=0, columnspan=4, pady=(10,0))
 
-        self.HelpButton = tk.Button(root, text="Help", width=8, height=2, command=Help)
+        self.HelpButton = tk.Button(root, text="Help", width=12, height=3, command=Help)
         self.HelpButton.grid(row=5, column=2, pady=10)
-        self.BackButton = tk.Button(root, text="Back", width=8, height=2, command=Back)
+        self.BackButton = tk.Button(root, text="Back", width=12, height=3, command=Back)
         self.BackButton.grid(row=5, column=3, pady=10, padx=(0,10))
 
 class ControlPictureWindow:
@@ -261,13 +264,13 @@ class ControlPictureWindow:
             self.Confirm = ControlPictureConfirmWindow(self.ConfirmWindow)        
 
         self.Label = tk.Label(root, text="Makes sure that the image displayed on the webcam feed\n is clear and that the user is standing on the center box of the 3x3 grid.")
-        self.Label.grid(row=0, column=0, columnspan=2)
+        self.Label.grid(row=0, column=0, columnspan=2, pady=10, padx=10)
         self.BackButton = tk.Button(root, text="Back", width=15, height=5, command=Back)
-        self.BackButton.grid(row=1, column=1)
+        self.BackButton.grid(row=1, column=1, sticky=tk.W+tk.E+tk.N+tk.S, padx=(0,20))
         self.HelpButton = tk.Button(root, text="Help", width=15, height=5, command=Help)
-        self.HelpButton.grid(row=2, column=1)
+        self.HelpButton.grid(row=2, column=1, sticky=tk.W+tk.E+tk.N+tk.S, padx=(0,20), pady=(0,20))
         self.TakePictureButton = tk.Button(root, text="Take Picture", width=15, height=5, command=TakePicture)
-        self.TakePictureButton.grid(row=2, column=0)
+        self.TakePictureButton.grid(row=2, column=0, sticky=tk.W+tk.E+tk.N+tk.S, padx=(20,0), pady=(0,20))
 
 class ControlPictureConfirmWindow:
     def __init__(self, root):
@@ -291,6 +294,7 @@ class ControlPictureConfirmWindow:
 
         def Yes():
             self.TextLabel["text"] = "Close all windows but Main Calibration and Main Window"
+            cameraFeed.Control()
    
             
         self.TextLabel = tk.Label(root, text="")

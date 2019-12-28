@@ -1,5 +1,6 @@
 import cv2 #OpenCV
 import numpy as np #numpy needed for OpenCV
+import time #Testing purpose
 
 
 class VidCapture:
@@ -96,7 +97,38 @@ class VidCapture:
         self.point2 = (self.point2[0] + 1, self.point2[1])     
 
     def TakePicture(self):
-        self.takepicture = not self.takepicture              
+        self.takepicture = not self.takepicture
+
+    def debug(self): #testing stuff
+        global point1, point2
+        print(self.point1)
+        print(self.point2)
+        print(self.a)
+
+    def Control(self):
+        start = time.time()
+
+        im = cv2.imread("Control_picture.jpg")
+        #cv2.imshow("Image", im)
+
+        self.imCrop1 = im[self.point1[1] + 1:self.c, self.a + 1:self.b]
+        #cv2.imshow("ImageCrop1", self.imCrop1)
+
+        self.imCrop2 = im[self.c + 1:self.d, self.b + 1:self.point2[0]]
+        #cv2.imshow("ImageCrop2", self.imCrop2)
+
+        self.imCrop3 = im[self.d + 1:self.point2[1], self.a + 1:self.b]
+        #cv2.imshow("ImageCrop3", self.imCrop3)
+
+        self.imCrop4 = im[self.c + 1:self.d, self.point1[0] + 1:self.a]
+        #cv2.imshow("ImageCrop4", self.imCrop4)
+
+        end = time.time()
+        print(end - start)
+
+    def SetupFinish(): #have boolean as flag when setup is finished.
+        print("...")    
+
                
 def main():
     global camerafeed
