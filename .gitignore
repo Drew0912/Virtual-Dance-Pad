@@ -1,8 +1,19 @@
 #Old folder with py files
 Python Test Code
+Test python files
+
+#Python cache
+__pycache__
+
+#Local folder to edit copy of project
+Edit
 
 #Local Backup folder
-Backup
+Backup*
 
 #Vscode files
 .vscode/
+
+#Pictures
+*.jpg
+*.png
