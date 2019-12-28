@@ -1,4 +1,4 @@
-#Old folder with py files
+#Old folder with .py files
 Python Test Code
 Test python files
 
@@ -12,7 +12,7 @@ Edit
 Backup*
 
 #Vscode files
-.vscode/
+.vscode
 
 #Pictures
 *.jpg
