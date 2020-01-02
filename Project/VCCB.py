@@ -2,6 +2,8 @@ import cv2 #OpenCV
 import numpy as np #numpy needed for OpenCV
 import time #Testing purpose
 
+import threading
+
 
 class VidCapture:
     def __init__(self, video_source=0):
@@ -14,8 +16,11 @@ class VidCapture:
 
         self.takepicture = False
 
+        self.n = 0
+
         self.vid=cv2.VideoCapture(video_source) #Opens the webcam and mounts it.
         cv2.namedWindow(self.name) #Opens a cv2 window.
+
         
 
     def showFrame(self): #Function to show Frame. Always in a While True loop.
@@ -38,10 +43,33 @@ class VidCapture:
             cv2.line(frame, (self.point1[0], self.c), (self.point2[0], self.c), (255,255,255))
             cv2.line(frame, (self.point1[0], self.d), (self.point2[0], self.d), (255,255,255)) #Splits into 3x3 grid
 
-        if self.takepicture:
+        if self.takepicture: #Save Control picture when Yes is pressed.
             filename = "Control_picture.jpg"
             cv2.imwrite(filename, frame)
-            self.takepicture = not self.takepicture    
+            self.takepicture = not self.takepicture
+
+        if self.drawingfinish:
+            #self.n = self.n + 1
+
+            self.frameCrop1 = frame[self.point1[1] + 1:self.c, self.a + 1:self.b]
+            #cropname1 = "one " + str(self.n) + ".jpg"
+            #cv2.imwrite(cropname1, self.frameCrop1)
+
+            self.frameCrop2 = frame[self.c + 1:self.d, self.b + 1:self.point2[0]]
+            #cropname2 = "two " + str(self.n) + ".jpg"
+            #cv2.imwrite(cropname2, self.frameCrop2)
+
+            self.frameCrop3 = frame[self.d + 1:self.point2[1], self.a + 1:self.b]
+            #cropname3 = "three " + str(self.n) + ".jpg"
+            #cv2.imwrite(cropname3, self.frameCrop3)
+
+            self.frameCrop4 = frame[self.c + 1:self.d, self.point1[0] + 1:self.a]
+            #cropname4 = "four " + str(self.n) + ".jpg"
+            #cv2.imwrite(cropname4, self.frameCrop4)
+
+
+
+
 
         cv2.imshow(self.name, frame)
    
@@ -99,29 +127,23 @@ class VidCapture:
     def TakePicture(self):
         self.takepicture = not self.takepicture
 
-    def debug(self): #testing stuff
-        global point1, point2
-        print(self.point1)
-        print(self.point2)
-        print(self.a)
-
-    def Control(self):
+    def CropControl(self):
         start = time.time()
 
         im = cv2.imread("Control_picture.jpg")
         #cv2.imshow("Image", im)
 
         self.imCrop1 = im[self.point1[1] + 1:self.c, self.a + 1:self.b]
-        #cv2.imshow("ImageCrop1", self.imCrop1)
+        cv2.imshow("ImageCrop1", self.imCrop1)
 
         self.imCrop2 = im[self.c + 1:self.d, self.b + 1:self.point2[0]]
-        #cv2.imshow("ImageCrop2", self.imCrop2)
+        cv2.imshow("ImageCrop2", self.imCrop2)
 
         self.imCrop3 = im[self.d + 1:self.point2[1], self.a + 1:self.b]
-        #cv2.imshow("ImageCrop3", self.imCrop3)
+        cv2.imshow("ImageCrop3", self.imCrop3)
 
         self.imCrop4 = im[self.c + 1:self.d, self.point1[0] + 1:self.a]
-        #cv2.imshow("ImageCrop4", self.imCrop4)
+        cv2.imshow("ImageCrop4", self.imCrop4)
 
         end = time.time()
         print(end - start)

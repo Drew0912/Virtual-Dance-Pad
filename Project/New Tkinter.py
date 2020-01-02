@@ -119,11 +119,9 @@ class MainCalibration:
         def SensitivityWindow():
             self.SensitivityWindow = tk.Toplevel(self.root)
             self.Sensitivity = Sensitivity(self.SensitivityWindow)
+ 
 
-        def test():
-            cameraFeed.debug()    
-
-        self.debugButton = tk.Button(root, text="Debug", command=test)
+        self.debugButton = tk.Button(root, text="Debug")
         self.debugButton.grid(row=1, column=0, padx=(10,0), sticky=tk.W+tk.E+tk.N+tk.S)    
 
         self.ConfigureButton = tk.Button(root, text="Configure", width=15, height=5, command=ConfigureWindow)
@@ -294,7 +292,7 @@ class ControlPictureConfirmWindow:
 
         def Yes():
             self.TextLabel["text"] = "Close all windows but Main Calibration and Main Window"
-            cameraFeed.Control()
+            cameraFeed.CropControl()
    
             
         self.TextLabel = tk.Label(root, text="")
