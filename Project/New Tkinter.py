@@ -119,9 +119,12 @@ class MainCalibration:
         def SensitivityWindow():
             self.SensitivityWindow = tk.Toplevel(self.root)
             self.Sensitivity = Sensitivity(self.SensitivityWindow)
+
+        def Debug():
+            print(cameraFeed.one)    
  
 
-        self.debugButton = tk.Button(root, text="Debug")
+        self.debugButton = tk.Button(root, text="Debug", command=Debug)
         self.debugButton.grid(row=1, column=0, padx=(10,0), sticky=tk.W+tk.E+tk.N+tk.S)    
 
         self.ConfigureButton = tk.Button(root, text="Configure", width=15, height=5, command=ConfigureWindow)
@@ -293,6 +296,7 @@ class ControlPictureConfirmWindow:
         def Yes():
             self.TextLabel["text"] = "Close all windows but Main Calibration and Main Window"
             cameraFeed.CropControl()
+            cameraFeed.SetupFinishBool()
    
             
         self.TextLabel = tk.Label(root, text="")
@@ -365,28 +369,49 @@ class Sensitivity:
         self.BoxLabel = tk.Label(root, text="Box:")
         self.BoxLabel.grid(row=0, column=0)
 
-        self.OneLabel = tk.Label(root, text="1")
+        self.OneLabel = tk.Label(root, text="One")
         self.OneLabel.grid(row=0, column=1)
-        self.TwoLabel = tk.Label(root, text="2")
+        self.TwoLabel = tk.Label(root, text="Two")
         self.TwoLabel.grid(row=0, column=2)
-        self.ThreeLabel = tk.Label(root, text="3")
+        self.ThreeLabel = tk.Label(root, text="Three")
         self.ThreeLabel.grid(row=0, column=3)
-        self.FourLabel = tk.Label(root, text="4")
+        self.FourLabel = tk.Label(root, text="Four")
         self.FourLabel.grid(row=0, column=4)
 
-        self.text = "..." #String variable for text
+        #self.text = StringVar()
+        #self.text.set("...") #String variable for text
+
+        def UpdateOne():
+            self.DetectionOneLabel.config(text=str(cameraFeed.one))
+            self.DetectionOneLabel.after(500,UpdateOne)
+
+        def UpdateTwo():
+            self.DetectionTwoLabel.config(text=str(cameraFeed.two))
+            self.DetectionTwoLabel.after(500,UpdateTwo)
+
+        def UpdateThree():
+            self.DetectionThreeLabel.config(text=str(cameraFeed.three))
+            self.DetectionThreeLabel.after(500,UpdateThree)
+
+        def UpdateFour():
+            self.DetectionFourLabel.config(text=str(cameraFeed.four))
+            self.DetectionFourLabel.after(500,UpdateFour)            
+
 
         self.DetectionLabel = tk.Label(root, text="Detection Value:")
         self.DetectionLabel.grid(row=1, column=0)
 
-        self.DetectionOneLabel = tk.Label(root, text=self.text, borderwidth=2, relief='ridge')
+        self.DetectionOneLabel = tk.Label(root, text="...", borderwidth=2, relief='ridge')
         self.DetectionOneLabel.grid(row=1, column=1)
-        self.DetectionTwoLabel = tk.Label(root, text=self.text, borderwidth=2, relief='ridge')
+        self.DetectionTwoLabel = tk.Label(root, text="...", borderwidth=2, relief='ridge')
         self.DetectionTwoLabel.grid(row=1, column=2)
-        self.DetectionThreeLabel = tk.Label(root, text=self.text, borderwidth=2, relief='ridge')
+        self.DetectionThreeLabel = tk.Label(root, text="...", borderwidth=2, relief='ridge')
         self.DetectionThreeLabel.grid(row=1, column=3)
-        self.DetectionFourLabel = tk.Label(root, text=self.text, borderwidth=2, relief='ridge')
+        self.DetectionFourLabel = tk.Label(root, text="...", borderwidth=2, relief='ridge')
         self.DetectionFourLabel.grid(row=1, column=4)
+
+        #self.DetectionOneLabel["text"] = str(cameraFeed.one)
+        #self.text.set(str(cameraFeed.one))
 
         self.UpperLimitLabel = tk.Label(root, text="Upper Limit:")
         self.UpperLimitLabel.grid(row=2, column=0)
@@ -427,6 +452,13 @@ class Sensitivity:
         self.LowerFourEntry = tk.Entry(root, textvariable=self.LowerFourEntryText)
         self.LowerFourEntryText.set("4")
         self.LowerFourEntry.grid(row=3, column=4)
+
+        self.DetectionOneLabel.after(500,UpdateOne)
+        self.DetectionTwoLabel.after(500,UpdateTwo)
+        self.DetectionThreeLabel.after(500,UpdateThree)
+        self.DetectionFourLabel.after(500,UpdateFour)
+
+        self.root.mainloop()
 
 
 def main():
