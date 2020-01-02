@@ -4,6 +4,8 @@ import time #Testing purpose
 
 import threading
 
+import Compare
+
 
 class VidCapture:
     def __init__(self, video_source=0):
@@ -16,7 +18,13 @@ class VidCapture:
 
         self.takepicture = False
 
-        self.n = 0
+        #self.n = 0
+
+        self.setupfinish = False
+        self.one = 0
+        self.two = 0
+        self.three = 0
+        self.four = 0
 
         self.vid=cv2.VideoCapture(video_source) #Opens the webcam and mounts it.
         cv2.namedWindow(self.name) #Opens a cv2 window.
@@ -48,8 +56,9 @@ class VidCapture:
             cv2.imwrite(filename, frame)
             self.takepicture = not self.takepicture
 
-        if self.drawingfinish:
+        if self.drawingfinish and self.setupfinish:
             #self.n = self.n + 1
+            #print("debug")
 
             self.frameCrop1 = frame[self.point1[1] + 1:self.c, self.a + 1:self.b]
             #cropname1 = "one " + str(self.n) + ".jpg"
@@ -66,6 +75,21 @@ class VidCapture:
             self.frameCrop4 = frame[self.c + 1:self.d, self.point1[0] + 1:self.a]
             #cropname4 = "four " + str(self.n) + ".jpg"
             #cv2.imwrite(cropname4, self.frameCrop4)
+
+            self.one = Compare.ssim(self.imCrop1, self.frameCrop1)
+            #print("one: " + str(self.one))
+
+            self.two = Compare.ssim(self.imCrop2, self.frameCrop2)
+            #print("two: " + str(self.two))
+
+            self.three = Compare.ssim(self.imCrop3, self.frameCrop3)
+            #print("three: " + str(self.three))
+
+            self.four = Compare.ssim(self.imCrop4, self.frameCrop4)
+            #print("four: " + str(self.four))
+
+
+
 
 
 
@@ -128,28 +152,29 @@ class VidCapture:
         self.takepicture = not self.takepicture
 
     def CropControl(self):
-        start = time.time()
+        #start = time.time()
 
         im = cv2.imread("Control_picture.jpg")
         #cv2.imshow("Image", im)
 
         self.imCrop1 = im[self.point1[1] + 1:self.c, self.a + 1:self.b]
-        cv2.imshow("ImageCrop1", self.imCrop1)
+        #cv2.imshow("ImageCrop1", self.imCrop1)
 
         self.imCrop2 = im[self.c + 1:self.d, self.b + 1:self.point2[0]]
-        cv2.imshow("ImageCrop2", self.imCrop2)
+        #cv2.imshow("ImageCrop2", self.imCrop2)
 
         self.imCrop3 = im[self.d + 1:self.point2[1], self.a + 1:self.b]
-        cv2.imshow("ImageCrop3", self.imCrop3)
+        #cv2.imshow("ImageCrop3", self.imCrop3)
 
         self.imCrop4 = im[self.c + 1:self.d, self.point1[0] + 1:self.a]
-        cv2.imshow("ImageCrop4", self.imCrop4)
+        #cv2.imshow("ImageCrop4", self.imCrop4)
 
-        end = time.time()
-        print(end - start)
+        #end = time.time()
+        #print(end - start)
 
-    def SetupFinish(): #have boolean as flag when setup is finished.
-        print("...")    
+    def SetupFinishBool(self): #have boolean as flag when setup is finished.
+        print("...")
+        self.setupfinish = True    
 
                
 def main():
