@@ -11,6 +11,9 @@ def mse(x, y):
 def ssim(x, y):
     return structural_similarity(x, y, multichannel=True)    
 
+
+
+
 def main():
     im1 = cv2.imread('Control_picture.jpg')
     im2 = cv2.imread('Control_picture1.jpg')
