@@ -95,6 +95,7 @@ class VidCapture:
 
 
 
+
         cv2.imshow(self.name, frame)
    
     def Click(self, event, x, y, flags, param): #Function that happens on MouseCallback.
@@ -173,7 +174,7 @@ class VidCapture:
         #print(end - start)
 
     def SetupFinishBool(self): #have boolean as flag when setup is finished.
-        print("...")
+        #print("...")
         self.setupfinish = True    
 
                

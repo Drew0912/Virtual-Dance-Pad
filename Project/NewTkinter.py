@@ -12,6 +12,8 @@ import time
 
 from tkinter import StringVar #String Variable for Entry widget.
 
+from pyautogui import keyDown, keyUp
+
 class MainWindow:
     def __init__(self, master):
         self.master = master
@@ -20,10 +22,26 @@ class MainWindow:
 
         self.WebcamOpen = False #Bool so Calibration can only be opened when webcam is open.
 
+        global UpperOne, UpperTwo, UpperThree, UpperFour, LowerOne, LowerTwo, LowerThree, LowerFour
+        UpperOne = "Set Value"
+        UpperTwo = "Set Value"
+        UpperThree = "Set Value"
+        UpperFour = "Set Value"
+        LowerOne = "Set Value"
+        LowerTwo = "Set Value"
+        LowerThree = "Set Value"
+        LowerFour = "Set Value"
+
+        self.Started = False
+
+        self.OnePress = False
+
         def StartStop(): #Add code to start program as controller (macros?).
             if self.StartStopButton["text"] == "Start":
+                self.Started = True
                 self.StartStopButton["text"] = "Stop"
             else:
+                self.Started = False
                 self.StartStopButton["text"] = "Start"
         
         def Help():
@@ -47,6 +65,18 @@ class MainWindow:
             close = False 
             while(True):
                 cameraFeed.showFrame()
+
+                if self.Started:
+                    if cameraFeed.one >= float(LowerOne) and cameraFeed.one <= float(UpperOne) and not self.OnePress:
+                        #print("OneDebug")
+                        keyDown('w')
+                        self.OnePress = not self.OnePress
+                    elif self.OnePress:
+                        if cameraFeed.one < float(LowerOne) or cameraFeed.one > float(UpperOne):
+                            #print("Reset")
+                            keyUp('w')
+                            self.OnePress = not self.OnePress    
+                
                 if cv2.waitKey(20) == 27: #Press esc to exit.
                     break
                 if close:
@@ -121,7 +151,17 @@ class MainCalibration:
             self.Sensitivity = Sensitivity(self.SensitivityWindow)
 
         def Debug():
-            print(cameraFeed.one)    
+            print(cameraFeed.one)
+            print(UpperOne)
+            print(UpperTwo)
+            print(UpperThree)
+            print(UpperFour)
+
+            print(LowerOne)
+            print(LowerTwo)
+            print(LowerThree)
+            print(LowerFour)
+
  
 
         self.debugButton = tk.Button(root, text="Debug", command=Debug)
@@ -395,7 +435,19 @@ class Sensitivity:
 
         def UpdateFour():
             self.DetectionFourLabel.config(text=str(cameraFeed.four))
-            self.DetectionFourLabel.after(500,UpdateFour)            
+            self.DetectionFourLabel.after(500,UpdateFour)
+
+        def Save():
+            global UpperOne, UpperTwo, UpperThree, UpperFour, LowerOne, LowerTwo, LowerThree, LowerFour
+            UpperOne = self.UpperOneEntry.get()
+            UpperTwo = self.UpperTwoEntry.get()
+            UpperThree = self.UpperThreeEntry.get()
+            UpperFour = self.UpperFourEntry.get()
+
+            LowerOne = self.LowerOneEntry.get()
+            LowerTwo = self.LowerTwoEntry.get()
+            LowerThree = self.LowerThreeEntry.get()
+            LowerFour = self.LowerFourEntry.get()            
 
 
         self.DetectionLabel = tk.Label(root, text="Detection Value:")
@@ -418,19 +470,19 @@ class Sensitivity:
 
         self.UpperOneEntryText = StringVar()
         self.UpperOneEntry = tk.Entry(root, textvariable=self.UpperOneEntryText)
-        self.UpperOneEntryText.set("1")
+        self.UpperOneEntryText.set(UpperOne)
         self.UpperOneEntry.grid(row=2, column=1)
         self.UpperTwoEntryText = StringVar()
         self.UpperTwoEntry = tk.Entry(root, textvariable=self.UpperTwoEntryText)
-        self.UpperTwoEntryText.set("2")
+        self.UpperTwoEntryText.set(UpperTwo)
         self.UpperTwoEntry.grid(row=2, column=2)
         self.UpperThreeEntryText = StringVar()
         self.UpperThreeEntry = tk.Entry(root, textvariable=self.UpperThreeEntryText)
-        self.UpperThreeEntryText.set("3")
+        self.UpperThreeEntryText.set(UpperThree)
         self.UpperThreeEntry.grid(row=2, column=3)
         self.UpperFourEntryText = StringVar()
         self.UpperFourEntry = tk.Entry(root, textvariable=self.UpperFourEntryText)
-        self.UpperFourEntryText.set("4")
+        self.UpperFourEntryText.set(UpperFour)
         self.UpperFourEntry.grid(row=2, column=4)
 
         self.LowerLimitLabel = tk.Label(root, text="Lower Limit:")
@@ -438,20 +490,23 @@ class Sensitivity:
 
         self.LowerOneEntryText = StringVar()
         self.LowerOneEntry = tk.Entry(root, textvariable=self.LowerOneEntryText)
-        self.LowerOneEntryText.set("1")
+        self.LowerOneEntryText.set(LowerOne)
         self.LowerOneEntry.grid(row=3, column=1)
         self.LowerTwoEntryText = StringVar()
         self.LowerTwoEntry = tk.Entry(root, textvariable=self.LowerTwoEntryText)
-        self.LowerTwoEntryText.set("2")
+        self.LowerTwoEntryText.set(LowerTwo)
         self.LowerTwoEntry.grid(row=3, column=2)
         self.LowerThreeEntryText = StringVar()
         self.LowerThreeEntry = tk.Entry(root, textvariable=self.LowerThreeEntryText)
-        self.LowerThreeEntryText.set("3")
+        self.LowerThreeEntryText.set(LowerThree)
         self.LowerThreeEntry.grid(row=3, column=3)
         self.LowerFourEntryText = StringVar()
         self.LowerFourEntry = tk.Entry(root, textvariable=self.LowerFourEntryText)
-        self.LowerFourEntryText.set("4")
+        self.LowerFourEntryText.set(LowerFour)
         self.LowerFourEntry.grid(row=3, column=4)
+
+        self.SaveButton = tk.Button(root, text="Save", width=5, command=Save)
+        self.SaveButton.grid(row=4, column=3, sticky=tk.W+tk.E+tk.N+tk.S)
 
         self.DetectionOneLabel.after(500,UpdateOne)
         self.DetectionTwoLabel.after(500,UpdateTwo)
