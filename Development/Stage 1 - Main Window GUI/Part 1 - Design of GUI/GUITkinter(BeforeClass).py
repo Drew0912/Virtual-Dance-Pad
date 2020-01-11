@@ -14,7 +14,7 @@ WebcamSelect = ttk.Combobox(root, width=30, state='readonly',
                                 "2",
                                 "3",])
 WebcamSelect.grid(row=0, column=0, columnspan=2, pady=(20,10))
-WebcamSelect.current(0)
+WebcamSelect.current(0) #This sets the displayed value of the ComboBox.
 Message = tk.Label(root, text="") #Spare Label to give message to user on input.
 Message.grid(row=1, column=0, columnspan=2)
 DisplayButton = tk.Button(root, text="Open Webcam", width=30, height=5)
