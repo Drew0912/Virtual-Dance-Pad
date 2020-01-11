@@ -17,7 +17,7 @@ from pyautogui import keyDown, keyUp
 class MainWindow:
     def __init__(self, master):
         self.master = master
-        self.master.title("Main")
+        self.master.title("Main Window")
         self.master.resizable(0,0)
 
         self.WebcamOpen = False #Bool so Calibration can only be opened when webcam is open.
