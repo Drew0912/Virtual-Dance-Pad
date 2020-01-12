@@ -19,7 +19,7 @@ class MainWindow(): #Main Window Class
             url = 'file://' + os.path.realpath('index.html')
             webbrowser.open(url)
 
-        def CalibrationWindow(): #Update to use new Main Calibration window
+        def CalibrationWindow(): #Open Main Calibration window
             self.newwindow = tk.Toplevel(self.root)
             self.app = MainCalibration(self.newwindow)            
 
@@ -49,8 +49,8 @@ class MainWindow(): #Main Window Class
 class MainCalibration:
     def __init__(self, root):
         self.root = root
-        self.root.title("Main Calibration")
-        self.root.resizable(0,0)        
+        self.root.title("Main Calibration") #Title of the Window.
+        self.root.resizable(0,0) #The window created cannot change size.        
 
 def main():
     root = tk.Tk() #Creates Tkinter window under the name root.
