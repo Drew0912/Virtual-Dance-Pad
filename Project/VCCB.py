@@ -99,26 +99,29 @@ class VidCapture:
         cv2.imshow(self.name, frame)
    
     def Click(self, event, x, y, flags, param): #Function that happens on MouseCallback.
-        global point1, point2, drawing, drawingcounter
-        if self.drawingfinish is False:
+        global point1, point2, drawing, drawingfinish
+        if self.drawingfinish == False:
             if event == cv2.EVENT_LBUTTONDOWN:
                 if self.drawing is False:
-                    self.drawing = True
                     self.point1 = (x,y)
-                else:
-                    self.drawing = False
-                    self.drawingfinish = True
+                    self.drawing = True
+                elif self.drawing is True:
+                    if x > self.point1[0] and y > self.point1[1]:
+                        self.drawing = False
+                        self.drawingfinish = True
             elif event == cv2.EVENT_MOUSEMOVE:
-                if self.drawing is True:
-                    self.point2 = (x,y)
+                if self.drawing == True:
+                    if x > self.point1[0] and y > self.point1[1]:
+                        self.point2 = (x,y)
         if event == cv2.EVENT_RBUTTONDOWN: #Testing purpose since no GUI.
             self.Reset()
             self.TakePicture()        
 
     def Reset(self): #Resets 3x3 grid and flag.
-        global point1, point2, drawingcounter
+        global point1, point2, drawing, drawingfinish
         self.point1 = ()
         self.point2 = ()
+        self.drawing = False
         self.drawingfinish = False
 
     def Resetout():

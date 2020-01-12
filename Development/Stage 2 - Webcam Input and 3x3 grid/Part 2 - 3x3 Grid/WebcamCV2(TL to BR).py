@@ -42,9 +42,10 @@ class VidCapture:
                 if self.drawing is False:
                     self.point1 = (x,y)
                     self.drawing = True
-                else:
-                    self.drawing = False
-                    self.drawingfinish = True
+                elif self.drawing is True:
+                    if x > self.point1[0] and y > self.point1[1]:
+                        self.drawing = False
+                        self.drawingfinish = True
             elif event == cv2.EVENT_MOUSEMOVE:
                 if self.drawing == True:
                     if x > self.point1[0] and y > self.point1[1]:
@@ -53,9 +54,10 @@ class VidCapture:
             self.Reset()
 
     def Reset(self): #Reset Rectangle and allow drawing again.
-        global point1, point2, drawingfinish
+        global point1, point2, drawing, drawingfinish
         self.point1 = ()
         self.point2 = ()
+        self.drawing = False
         self.drawingfinish = False                    
 
 def main():
