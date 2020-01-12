@@ -17,6 +17,7 @@ class MainWindow(): #Main Window Class
 
         def Help(): #Opens HTML file.
             url = 'file://' + os.path.realpath('index.html')
+            print(url)
             webbrowser.open(url)        
 
         self.WebcamSelect = ttk.Combobox(root, width=30, state='readonly',
