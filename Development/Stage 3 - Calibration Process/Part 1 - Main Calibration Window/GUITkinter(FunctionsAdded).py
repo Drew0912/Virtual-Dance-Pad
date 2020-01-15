@@ -55,22 +55,56 @@ class MainCalibration:
         self.Label = tk.Label(root, text="Go through Setup before pressing any other button.")
         self.Label.grid(row=0, column=0, columnspan=2, pady=(5,10), padx=10)
 
+        def Setup():
+            self.SetupWindow = tk.Toplevel(self.root)
+            self.Setup = Calibration(self.SetupWindow)
+
+        def Help():
+            url = 'file://' + os.path.realpath('index.html')
+            webbrowser.open(url)
+
         def Finish():
             self.root.destroy()
+
+        def ConfigureWindow():
+            self.ConfigureWindow = tk.Toplevel(self.root)
+            self.Configure = Configure(self.ConfigureWindow)
+
+        def SensitivityWindow():
+            self.SensitivityWindow = tk.Toplevel(self.root)
+            self.Sensitivity = Sensitivity(self.SensitivityWindow)        
 
         self.debugButton = tk.Button(root, text="Debug")
         self.debugButton.grid(row=1, column=0, padx=(10,0), sticky=tk.W+tk.E+tk.N+tk.S)    
 
-        self.ConfigureButton = tk.Button(root, text="Configure", width=15, height=5)
+        self.ConfigureButton = tk.Button(root, text="Configure", width=15, height=5, command=ConfigureWindow)
         self.ConfigureButton.grid(row=1, column=1, padx=(0,10), sticky=tk.W+tk.E+tk.N+tk.S)
-        self.SensitivityButton = tk.Button(root, text="Sensitivity", width=15, height=5)
+        self.SensitivityButton = tk.Button(root, text="Sensitivity", width=15, height=5, command=SensitivityWindow)
         self.SensitivityButton.grid(row=2, column=0, padx=(10,0), sticky=tk.W+tk.E+tk.N+tk.S)   
-        self.SetupButton = tk.Button(root, text="Setup", width=15, height=5)
+        self.SetupButton = tk.Button(root, text="Setup", width=15, height=5, command=Setup)
         self.SetupButton.grid(row=2, column=1, padx=(0,10), sticky=tk.W+tk.E+tk.N+tk.S)
         self.FinishButton = tk.Button(root, text="Finish", width=15, height=5, command=Finish)
         self.FinishButton.grid(row=3, column=0, padx=(10,0), pady=(0,20), sticky=tk.W+tk.E+tk.N+tk.S)
-        self.HelpButton = tk.Button(root, text="Help", width=15, height=5)
-        self.HelpButton.grid(row=3, column=1, padx=(0,10), pady=(0,20), sticky=tk.W+tk.E+tk.N+tk.S)    
+        self.HelpButton = tk.Button(root, text="Help", width=15, height=5, command=Help)
+        self.HelpButton.grid(row=3, column=1, padx=(0,10), pady=(0,20), sticky=tk.W+tk.E+tk.N+tk.S)
+
+class Calibration:
+    def __init__(self, root):
+        self.root = root
+        self.root.title("Calibration")
+        self.root.resizable(0,0)
+
+class Configure:
+    def __init__(self, root):
+        self.root = root
+        self.root.title("Configure")
+        self.root.resizable(0,0)
+
+class Sensitivity:
+    def __init__(self, root):
+        self.root = root
+        self.root.title("Sensitivity")
+        self.root.resizable(0,0)                            
 
 def main():
     root = tk.Tk() #Creates Tkinter window under the name root.
