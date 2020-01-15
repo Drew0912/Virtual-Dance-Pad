@@ -46,7 +46,7 @@ class MainWindow(): #Main Window Class
 
         self.root.mainloop() #Infinite loop that does not end until the window is closed.
 
-class MainCalibration:
+class MainCalibration: #Main Calibration Class
     def __init__(self, root):
         self.root = root
         self.root.title("Main Calibration") #Title of the Window.
@@ -55,26 +55,26 @@ class MainCalibration:
         self.Label = tk.Label(root, text="Go through Setup before pressing any other button.")
         self.Label.grid(row=0, column=0, columnspan=2, pady=(5,10), padx=10)
 
-        def Setup():
+        def Setup(): #Opens Calibration Window.
             self.SetupWindow = tk.Toplevel(self.root)
             self.Setup = Calibration(self.SetupWindow)
 
-        def Help():
+        def Help(): #Opens HTML file.
             url = 'file://' + os.path.realpath('index.html')
             webbrowser.open(url)
 
-        def Finish():
+        def Finish(): #Closes current window.
             self.root.destroy()
 
-        def ConfigureWindow():
+        def ConfigureWindow(): #Opens Configure window.
             self.ConfigureWindow = tk.Toplevel(self.root)
             self.Configure = Configure(self.ConfigureWindow)
 
-        def SensitivityWindow():
+        def SensitivityWindow(): #Opens Sensitvity window.
             self.SensitivityWindow = tk.Toplevel(self.root)
             self.Sensitivity = Sensitivity(self.SensitivityWindow)        
 
-        self.debugButton = tk.Button(root, text="Debug")
+        self.debugButton = tk.Button(root, text="Debug") #Debug button for testing
         self.debugButton.grid(row=1, column=0, padx=(10,0), sticky=tk.W+tk.E+tk.N+tk.S)    
 
         self.ConfigureButton = tk.Button(root, text="Configure", width=15, height=5, command=ConfigureWindow)
@@ -88,23 +88,23 @@ class MainCalibration:
         self.HelpButton = tk.Button(root, text="Help", width=15, height=5, command=Help)
         self.HelpButton.grid(row=3, column=1, padx=(0,10), pady=(0,20), sticky=tk.W+tk.E+tk.N+tk.S)
 
-class Calibration:
+class Calibration: 
     def __init__(self, root):
         self.root = root
-        self.root.title("Calibration")
-        self.root.resizable(0,0)
+        self.root.title("Calibration") #Title of the Window.
+        self.root.resizable(0,0) #The window created cannot change size. 
 
 class Configure:
     def __init__(self, root):
         self.root = root
-        self.root.title("Configure")
-        self.root.resizable(0,0)
+        self.root.title("Configure") #Title of the Window.
+        self.root.resizable(0,0) #The window created cannot change size. 
 
 class Sensitivity:
     def __init__(self, root):
         self.root = root
-        self.root.title("Sensitivity")
-        self.root.resizable(0,0)                            
+        self.root.title("Sensitivity") #Title of the Window.
+        self.root.resizable(0,0) #The window created cannot change size.                             
 
 def main():
     root = tk.Tk() #Creates Tkinter window under the name root.
