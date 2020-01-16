@@ -119,9 +119,9 @@ class Sensitivity:
         self.root.title("Sensitivity") #Title of the Window.
         self.root.resizable(0,0) #The window created cannot change size.
 
+        #First row Labels
         self.BoxLabel = tk.Label(root, text="Box:")
         self.BoxLabel.grid(row=0, column=0)
-
         self.OneLabel = tk.Label(root, text="One")
         self.OneLabel.grid(row=0, column=1)
         self.TwoLabel = tk.Label(root, text="Two")
@@ -131,9 +131,9 @@ class Sensitivity:
         self.FourLabel = tk.Label(root, text="Four")
         self.FourLabel.grid(row=0, column=4)
 
+        #Second row Labels
         self.DetectionLabel = tk.Label(root, text="Detection Value:")
         self.DetectionLabel.grid(row=1, column=0)
-
         self.DetectionOneLabel = tk.Label(root, text="...", borderwidth=2, relief='ridge')
         self.DetectionOneLabel.grid(row=1, column=1)
         self.DetectionTwoLabel = tk.Label(root, text="...", borderwidth=2, relief='ridge')
@@ -143,9 +143,9 @@ class Sensitivity:
         self.DetectionFourLabel = tk.Label(root, text="...", borderwidth=2, relief='ridge')
         self.DetectionFourLabel.grid(row=1, column=4)
 
+        #Third row Labels and Entry widgets
         self.UpperLimitLabel = tk.Label(root, text="Upper Limit:")
         self.UpperLimitLabel.grid(row=2, column=0)
-
         self.UpperOneEntryText = StringVar()
         self.UpperOneEntry = tk.Entry(root, textvariable=self.UpperOneEntryText)
         self.UpperOneEntryText.set(UpperOne)
@@ -163,9 +163,9 @@ class Sensitivity:
         self.UpperFourEntryText.set(UpperFour)
         self.UpperFourEntry.grid(row=2, column=4)
 
+        #Fourth row Labels and Entry widgets
         self.LowerLimitLabel = tk.Label(root, text="Lower Limit:")
         self.LowerLimitLabel.grid(row=3, column=0)
-
         self.LowerOneEntryText = StringVar()
         self.LowerOneEntry = tk.Entry(root, textvariable=self.LowerOneEntryText)
         self.LowerOneEntryText.set(LowerOne)
