@@ -118,6 +118,50 @@ class Configure:
         self.root.title("Configure") #Title of the Window.
         self.root.resizable(0,0) #The window created cannot change size. 
 
+        self.FrontLabel = tk.Label(root, text="Front:")
+        self.FrontLabel.grid(row=0, column=0)
+        self.FrontSelect = ttk.Combobox(root, width=15, state='readonly',
+                                         values=[
+                                             "1",
+                                             "2",
+                                             "3",
+                                             "4",])
+        self.FrontSelect.grid(row=1, column=0)
+        self.FrontSelect.current(0)
+
+        self.RightLabel = tk.Label(root, text="Right:")
+        self.RightLabel.grid(row=0, column=1)
+        self.RightSelect = ttk.Combobox(root, width=15, state='readonly',
+                                         values=[
+                                             "1",
+                                             "2",
+                                             "3",
+                                             "4",])
+        self.RightSelect.grid(row=1, column=1)
+        self.RightSelect.current(1)
+
+        self.LeftLabel = tk.Label(root, text="Left:")
+        self.LeftLabel.grid(row=2, column=0)
+        self.LeftSelect = ttk.Combobox(root, width=15, state='readonly',
+                                         values=[
+                                             "1",
+                                             "2",
+                                             "3",
+                                             "4",])
+        self.LeftSelect.grid(row=3, column=0)
+        self.LeftSelect.current(2)
+
+        self.BackLabel = tk.Label(root, text="Back:")
+        self.BackLabel.grid(row=2, column=1)
+        self.BackSelect = ttk.Combobox(root, width=15, state='readonly',
+                                         values=[
+                                             "1",
+                                             "2",
+                                             "3",
+                                             "4",])
+        self.BackSelect.grid(row=3, column=1)
+        self.BackSelect.current(3)
+
 class Sensitivity:
     def __init__(self, root):
         self.root = root
