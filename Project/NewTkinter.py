@@ -14,6 +14,8 @@ from tkinter import StringVar #String Variable for Entry widget.
 
 from pyautogui import keyDown, keyUp
 
+import CheckFloat
+
 class MainWindow:
     def __init__(self, master):
         self.master = master
@@ -439,15 +441,65 @@ class Sensitivity:
 
         def Save():
             global UpperOne, UpperTwo, UpperThree, UpperFour, LowerOne, LowerTwo, LowerThree, LowerFour
-            UpperOne = self.UpperOneEntry.get()
-            UpperTwo = self.UpperTwoEntry.get()
-            UpperThree = self.UpperThreeEntry.get()
-            UpperFour = self.UpperFourEntry.get()
+            #Upper limits
+            if CheckFloat.CheckFloat(self.UpperOneEntry.get()) == True: #Check input is float
+                if float(self.UpperOneEntry.get()) >= 0 and float(self.UpperOneEntry.get()) <= 1: #Check between 1 and 0
+                    UpperOne = self.UpperOneEntry.get()
+                else:
+                    print("Error")
+            else:
+                print("Error")
+            if CheckFloat.CheckFloat(self.UpperTwoEntry.get()) == True: #Check input is float
+                if float(self.UpperTwoEntry.get()) >= 0 and float(self.UpperTwoEntry.get()) <= 1: #Check between 1 and 0
+                    UpperTwo = self.UpperTwoEntry.get()
+                else:
+                    print("Error")
+            else:
+                print("Error")
+            if CheckFloat.CheckFloat(self.UpperThreeEntry.get()) == True: #Check input is float
+                if float(self.UpperThreeEntry.get()) >= 0 and float(self.UpperThreeEntry.get()) <= 1: #Check between 1 and 0
+                    UpperThree = self.UpperThreeEntry.get()
+                else:
+                    print("Error")
+            else:
+                print("Error")
+            if CheckFloat.CheckFloat(self.UpperFourEntry.get()) == True: #Check input is float
+                if float(self.UpperFourEntry.get()) >= 0 and float(self.UpperFourEntry.get()) <= 1: #Check between 1 and 0
+                    UpperFour = self.UpperFourEntry.get()
+                else:
+                    print("Error")
+            else:
+                print("Error")
 
-            LowerOne = self.LowerOneEntry.get()
-            LowerTwo = self.LowerTwoEntry.get()
-            LowerThree = self.LowerThreeEntry.get()
-            LowerFour = self.LowerFourEntry.get()            
+            #Lower limits
+            if CheckFloat.CheckFloat(self.LowerOneEntry.get()) == True: #Check input is float
+                if float(self.LowerOneEntry.get()) >= 0 and float(self.LowerOneEntry.get()) <= 1: #Check between 1 and 0
+                    LowerOne = self.LowerOneEntry.get()
+                else:
+                    print("Error")
+            else:
+                print("Error")
+            if CheckFloat.CheckFloat(self.LowerTwoEntry.get()) == True: #Check input is float
+                if float(self.LowerTwoEntry.get()) >= 0 and float(self.LowerTwoEntry.get()) <= 1: #Check between 1 and 0
+                    LowerTwo = self.LowerTwoEntry.get()
+                else:
+                    print("Error")
+            else:
+                print("Error")
+            if CheckFloat.CheckFloat(self.LowerThreeEntry.get()) == True: #Check input is float
+                if float(self.LowerThreeEntry.get()) >= 0 and float(self.LowerThreeEntry.get()) <= 1: #Check between 1 and 0
+                    LowerThree = self.LowerThreeEntry.get()
+                else:
+                    print("Error")
+            else:
+                print("Error")
+            if CheckFloat.CheckFloat(self.LowerFourEntry.get()) == True: #Check input is float
+                if float(self.LowerFourEntry.get()) >= 0 and float(self.LowerFourEntry.get()) <= 1: #Check between 1 and 0
+                    LowerFour = self.LowerFourEntry.get()
+                else:
+                    print("Error")
+            else:
+                print("Error")           
 
 
         self.DetectionLabel = tk.Label(root, text="Detection Value:")
