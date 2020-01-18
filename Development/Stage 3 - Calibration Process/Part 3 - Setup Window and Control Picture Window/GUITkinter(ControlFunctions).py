@@ -156,10 +156,9 @@ class ControlPictureWindow:
 
         def Back():
             self.root.destroy()
-            self.root.update() #???
 
         def Help():
-            url = 'file://' + os.path.realpath('index.html') #change url
+            url = 'file://' + os.path.realpath('index.html')
             webbrowser.open(url)
 
         self.Label = tk.Label(root, text="Makes sure that the image displayed on the webcam feed\n is clear and that the user is standing on the center box of the 3x3 grid.")
