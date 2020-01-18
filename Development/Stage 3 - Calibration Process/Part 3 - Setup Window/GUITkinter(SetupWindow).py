@@ -112,7 +112,7 @@ class Setup:
         self.root.title("Setup") #Title of the Window.
         self.root.resizable(0,0) #The window created cannot change size. 
 
-        self.Label = tk.Label(root, text="Click on the webcam feed to create 2 corners. \n One in the top left and the other in the botton right of where you want the 3x3 grid.")
+        self.Label = tk.Label(root, text="Click on the webcam feed to create 2 corners. \n One in the top left and the other in the bottom right of where you want the 3x3 grid.")
         self.Label.grid(row=0, column=0, columnspan=2, pady=(5,0))
         self.AdjustButton = tk.Button(root, text="Adjust", width=15, height=5)
         self.AdjustButton.grid(row=2, column=1, padx=(0,10), sticky=tk.W+tk.E+tk.N+tk.S, pady=(20,0))
