@@ -70,9 +70,9 @@ class MainCalibration: #Main Calibration Class
         self.Label = tk.Label(root, text="Go through Setup before pressing any other button.")
         self.Label.grid(row=0, column=0, columnspan=2, pady=(5,10), padx=10)
 
-        def Setup(): #Opens Calibration Window.
+        def SetupWindow(): #Opens Calibration Window.
             self.SetupWindow = tk.Toplevel(self.root)
-            self.Setup = Calibration(self.SetupWindow)
+            self.SetupApp = Setup(self.SetupWindow)
 
         def Help(): #Opens HTML file.
             url = 'file://' + os.path.realpath('index.html')
@@ -99,18 +99,33 @@ class MainCalibration: #Main Calibration Class
         self.ConfigureButton.grid(row=1, column=1, padx=(0,10), sticky=tk.W+tk.E+tk.N+tk.S)
         self.SensitivityButton = tk.Button(root, text="Sensitivity", width=15, height=5, command=SensitivityWindow)
         self.SensitivityButton.grid(row=2, column=0, padx=(10,0), sticky=tk.W+tk.E+tk.N+tk.S)   
-        self.SetupButton = tk.Button(root, text="Setup", width=15, height=5, command=Setup)
+        self.SetupButton = tk.Button(root, text="Setup", width=15, height=5, command=SetupWindow)
         self.SetupButton.grid(row=2, column=1, padx=(0,10), sticky=tk.W+tk.E+tk.N+tk.S)
         self.FinishButton = tk.Button(root, text="Finish", width=15, height=5, command=Finish)
         self.FinishButton.grid(row=3, column=0, padx=(10,0), pady=(0,20), sticky=tk.W+tk.E+tk.N+tk.S)
         self.HelpButton = tk.Button(root, text="Help", width=15, height=5, command=Help)
         self.HelpButton.grid(row=3, column=1, padx=(0,10), pady=(0,20), sticky=tk.W+tk.E+tk.N+tk.S)
 
-class Calibration: 
+class Setup: 
     def __init__(self, root):
         self.root = root
-        self.root.title("Calibration") #Title of the Window.
+        self.root.title("Setup") #Title of the Window.
         self.root.resizable(0,0) #The window created cannot change size. 
+
+        self.Label = tk.Label(root, text="Click on the webcam feed to create 2 corners. \n One in the top left and the other in the botton right of where you want the 3x3 grid.")
+        self.Label.grid(row=0, column=0, columnspan=2, pady=(5,0))
+        self.AdjustButton = tk.Button(root, text="Adjust", width=15, height=5)
+        self.AdjustButton.grid(row=2, column=1, padx=(0,10), sticky=tk.W+tk.E+tk.N+tk.S, pady=(20,0))
+        self.ResetButton = tk.Button(root, text="Reset", width=15, height=5)
+        self.ResetButton.grid(row=3, column=0, padx=(10,0), sticky=tk.W+tk.E+tk.N+tk.S)
+        self.BackButton = tk.Button(root, text="Back", width=15, height=5)
+        self.BackButton.grid(row=3, column=1, padx=(0,10), sticky=tk.W+tk.E+tk.N+tk.S)
+        self.NextButton = tk.Button(root, text="Next", width=15, height=5)
+        self.NextButton.grid(row=4, column=0, padx=(10,0), sticky=tk.W+tk.E+tk.N+tk.S, pady=(0,20))
+        self.HelpButton = tk.Button(root, text="Help", width=15, height=5)
+        self.HelpButton.grid(row=4, column=1, padx=(0,10), sticky=tk.W+tk.E+tk.N+tk.S, pady=(0,20))
+
+        self.root.mainloop()
 
 class Configure:
     def __init__(self, root):
