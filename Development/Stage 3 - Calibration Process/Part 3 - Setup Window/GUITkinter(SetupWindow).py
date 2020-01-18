@@ -112,20 +112,48 @@ class Setup:
         self.root.title("Setup") #Title of the Window.
         self.root.resizable(0,0) #The window created cannot change size. 
 
+        def Back():
+            self.root.destroy()
+
+        def Help():
+            url = 'file://' + os.path.realpath('index.html') #change url
+            webbrowser.open(url)
+
+        def OpenAdjust():
+            self.AdjustWindow = tk.Toplevel(self.root)
+            self.Adjust = Adjust(self.AdjustWindow)
+
+        def Next():
+            self.ControlWindow = tk.Toplevel(self.root)
+            self.Control = ControlPictureWindow(self.ControlWindow)
+
         self.Label = tk.Label(root, text="Click on the webcam feed to create 2 corners. \n One in the top left and the other in the bottom right of where you want the 3x3 grid.")
         self.Label.grid(row=0, column=0, columnspan=2, pady=(5,0))
-        self.AdjustButton = tk.Button(root, text="Adjust", width=15, height=5)
+        self.AdjustButton = tk.Button(root, text="Adjust", width=15, height=5, command=OpenAdjust)
         self.AdjustButton.grid(row=2, column=1, padx=(0,10), sticky=tk.W+tk.E+tk.N+tk.S, pady=(20,0))
         self.ResetButton = tk.Button(root, text="Reset", width=15, height=5)
         self.ResetButton.grid(row=3, column=0, padx=(10,0), sticky=tk.W+tk.E+tk.N+tk.S)
-        self.BackButton = tk.Button(root, text="Back", width=15, height=5)
+        self.BackButton = tk.Button(root, text="Back", width=15, height=5, command=Back)
         self.BackButton.grid(row=3, column=1, padx=(0,10), sticky=tk.W+tk.E+tk.N+tk.S)
-        self.NextButton = tk.Button(root, text="Next", width=15, height=5)
+        self.NextButton = tk.Button(root, text="Next", width=15, height=5, command=Next)
         self.NextButton.grid(row=4, column=0, padx=(10,0), sticky=tk.W+tk.E+tk.N+tk.S, pady=(0,20))
-        self.HelpButton = tk.Button(root, text="Help", width=15, height=5)
+        self.HelpButton = tk.Button(root, text="Help", width=15, height=5, command=Help)
         self.HelpButton.grid(row=4, column=1, padx=(0,10), sticky=tk.W+tk.E+tk.N+tk.S, pady=(0,20))
 
         self.root.mainloop()
+
+class Adjust:
+    def __init__(self, root):
+        self.root = root
+        self.root.title("Adjust") #Title of the Window.
+        self.root.resizable(0,0) #The window created cannot change size. 
+
+class ControlPictureWindow:
+    def __init__(self, root):
+        self.root = root
+        self.root.title("Control Picture") #Title of the Window.
+        self.root.resizable(0,0) #The window created cannot change size.         
+
 
 class Configure:
     def __init__(self, root):
