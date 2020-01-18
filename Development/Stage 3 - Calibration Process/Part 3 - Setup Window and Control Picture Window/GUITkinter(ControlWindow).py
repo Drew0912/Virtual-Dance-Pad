@@ -152,7 +152,16 @@ class ControlPictureWindow:
     def __init__(self, root):
         self.root = root
         self.root.title("Control Picture") #Title of the Window.
-        self.root.resizable(0,0) #The window created cannot change size.         
+        self.root.resizable(0,0) #The window created cannot change size.
+
+        self.Label = tk.Label(root, text="Makes sure that the image displayed on the webcam feed\n is clear and that the user is standing on the center box of the 3x3 grid.")
+        self.Label.grid(row=0, column=0, columnspan=2, pady=10, padx=10)
+        self.BackButton = tk.Button(root, text="Back", width=15, height=5)
+        self.BackButton.grid(row=1, column=1, sticky=tk.W+tk.E+tk.N+tk.S, padx=(0,20))
+        self.HelpButton = tk.Button(root, text="Help", width=15, height=5)
+        self.HelpButton.grid(row=2, column=1, sticky=tk.W+tk.E+tk.N+tk.S, padx=(0,20), pady=(0,20))
+        self.TakePictureButton = tk.Button(root, text="Take Picture", width=15, height=5)
+        self.TakePictureButton.grid(row=2, column=0, sticky=tk.W+tk.E+tk.N+tk.S, padx=(20,0), pady=(0,20))         
 
 
 class Configure:
