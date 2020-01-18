@@ -116,7 +116,7 @@ class Setup:
             self.root.destroy()
 
         def Help():
-            url = 'file://' + os.path.realpath('index.html') #change url
+            url = 'file://' + os.path.realpath('index.html')
             webbrowser.open(url)
 
         def OpenAdjust():
