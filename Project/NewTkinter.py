@@ -97,7 +97,7 @@ class MainWindow:
                 self.DisplayButton["text"] = "Restart program to open Webcam"
                           
         #Threading
-        T1 = threading.Thread(target=Webcam) #thread for OpenCV
+        T1 = threading.Thread(target=Webcam) #Thread for OpenCV
         T1.daemon = True #Close Webcam if GUi is closed
         
         self.WebcamSelect = ttk.Combobox(master, width=30, state='readonly',
