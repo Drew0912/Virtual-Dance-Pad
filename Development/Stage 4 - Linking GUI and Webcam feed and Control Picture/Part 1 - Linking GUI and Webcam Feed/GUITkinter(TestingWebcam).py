@@ -3,13 +3,13 @@ from tkinter import ttk #ComboBox Widget is part of ttk module in Tkinter.
 
 from tkinter import StringVar
 
-import webbrowser, os
+import webbrowser, os #Open browser
 
-import CheckFloat
-import WebcamCV2
+import CheckFloat #CheckFloat function
+import WebcamCV2 #Webcam feed python file
 
-import threading
-import cv2
+import threading #Python Threading module
+import cv2 #OpenCV
 
 class MainWindow(): #Main Window Class
     def __init__(self, root):
@@ -52,14 +52,14 @@ class MainWindow(): #Main Window Class
                 cameraFeed.showFrame()
                 if cv2.waitKey(20) == 27: #Press esc to exit.
                     break
-                if close:
+                if close: #Exit if close is true.
                     close = not close
                     break
             cv2.destroyAllWindows()
 
         def WebcamClick():
             if self.DisplayButton["text"] == "Open Webcam":
-                T1.start()
+                T1.start() #Start thread.
                 self.DisplayButton["text"] = "Close Webcam"
             else:
                 global close
@@ -68,7 +68,7 @@ class MainWindow(): #Main Window Class
 
 
         #Threading
-        T1 = threading.Thread(target=Webcam) #Thread for OpenCV
+        T1 = threading.Thread(target=Webcam) #Thread for Webcam feed
         T1.daemon = True #Close Webcam if GUi is closed                            
 
         self.WebcamSelect = ttk.Combobox(root, width=30, state='readonly',
