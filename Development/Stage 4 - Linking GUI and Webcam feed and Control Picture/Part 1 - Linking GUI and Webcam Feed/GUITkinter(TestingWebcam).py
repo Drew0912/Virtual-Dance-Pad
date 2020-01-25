@@ -57,10 +57,10 @@ class MainWindow(): #Main Window Class
                     break
             cv2.destroyAllWindows()
 
-        def WebcamClick():
+        def WebcamClick(): #Function to load Webcam function.
             if self.DisplayButton["text"] == "Open Webcam":
                 T1.start() #Start thread.
-                self.DisplayButton["text"] = "Close Webcam"
+                self.DisplayButton["text"] = "Close Webcam. \n Requires restart after close."
             else:
                 global close
                 close = not close
