@@ -51,7 +51,7 @@ class VidCapture:
             cv2.line(frame, (self.point1[0], self.c), (self.point2[0], self.c), (255,255,255))
             cv2.line(frame, (self.point1[0], self.d), (self.point2[0], self.d), (255,255,255)) #Splits into 3x3 grid
 
-        if self.takepicture: #Save Control picture when Yes is pressed.
+        if self.takepicture: #Save Control picture when Take picture is pressed.
             filename = "Control_picture.jpg"
             cv2.imwrite(filename, frame)
             self.takepicture = not self.takepicture
