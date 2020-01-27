@@ -11,7 +11,7 @@ import WebcamCV2 #Webcam feed python file
 import threading #Python Threading module
 import cv2 #OpenCV
 
-from PIL import Image, ImageTk
+from PIL import Image, ImageTk #Python Imaging Library
 
 class MainWindow(): #Main Window Class
     def __init__(self, root):
@@ -224,12 +224,12 @@ class ControlPictureWindow:
 class ControlPictureConfirmWindow:
     def __init__(self, root):
         self.root = root
-        self.root.title("Confirm")
-        self.root.resizable(0,0)
+        self.root.title("Confirm") #Title of the Window.
+        self.root.resizable(0,0) #The window created cannot change size.
 
-        self.img = ImageTk.PhotoImage(Image.open("Control_picture.jpg"))
+        self.img = ImageTk.PhotoImage(Image.open("Control_picture.jpg")) #Load Control picture.
 
-        self.panel = tk.Label(root, image = self.img)
+        self.panel = tk.Label(root, image = self.img) #Label showing image.
         self.panel.image = self.img
         self.panel.grid(row=0, column=0, rowspan=4)
 
