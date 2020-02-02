@@ -222,9 +222,9 @@ class Adjust:
         self.ResetMessage = tk.Label(root, text="Press the reset button to remove the 3x3 grid.")
         self.ResetMessage.grid(row=4, column=0, columnspan=4, pady=(10,0))
 
+        #Buttons
         self.ResetButton = tk.Button(root, text="Reset", width=24, height=3)
         self.ResetButton.grid(row=5, column=0, columnspan=2)
-
         self.HelpButton = tk.Button(root, text="Help", width=12, height=3)
         self.HelpButton.grid(row=5, column=2, pady=10)
         self.BackButton = tk.Button(root, text="Back", width=12, height=3)
