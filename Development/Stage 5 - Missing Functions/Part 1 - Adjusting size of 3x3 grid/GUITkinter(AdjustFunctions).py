@@ -199,7 +199,6 @@ class Adjust:
 
         def Back():
             self.root.destroy()
-            self.root.update() #???
 
         def LeftCornerUp():
             cameraFeed.LeftCornerUp()
@@ -218,41 +217,44 @@ class Adjust:
         def RightCornerLeft():
             cameraFeed.RightCornerLeft() 
 
+        def ResetGrid():
+            cameraFeed.Reset()    
+
         #First Corner
         self.FirstLabel = tk.Label(root, text="Top Left Corner:")
         self.FirstLabel.grid(row=0, column=0, columnspan=4, padx=10, pady=10, sticky=tk.W+tk.S)
 
-        self.LeftIncreaseY = tk.Button(root, text="UP", width=12, height=3)
+        self.LeftIncreaseY = tk.Button(root, text="UP", width=12, height=3, command=LeftCornerUp)
         self.LeftIncreaseY.grid(row=1, column=0, padx=(10,0))
-        self.LeftDecreaseY = tk.Button(root, text="DOWN", width=12, height=3)
+        self.LeftDecreaseY = tk.Button(root, text="DOWN", width=12, height=3, command=LeftCornerDown)
         self.LeftDecreaseY.grid(row=1, column=1)
-        self.LeftIncreaseX = tk.Button(root, text="RIGHT", width=12, height=3)
+        self.LeftIncreaseX = tk.Button(root, text="RIGHT", width=12, height=3, command=LeftCornerRight)
         self.LeftIncreaseX.grid(row=1, column=2)
-        self.LeftDecreaseX = tk.Button(root, text="LEFT", width=12, height=3)
+        self.LeftDecreaseX = tk.Button(root, text="LEFT", width=12, height=3, command=LeftCornerLeft)
         self.LeftDecreaseX.grid(row=1, column=3, padx=(0,10))
 
         #Second Corner
         self.SecondLabel = tk.Label(root, text="Bottom Right Corner:")
         self.SecondLabel.grid(row=2, column=0, columnspan=4, padx=10, pady=10, sticky=tk.W+tk.S)
 
-        self.RightIncreaseY = tk.Button(root, text="UP", width=12, height=3)
+        self.RightIncreaseY = tk.Button(root, text="UP", width=12, height=3, command=RightCornerUp)
         self.RightIncreaseY.grid(row=3, column=0, padx=(10,0))
-        self.RightDecreaseY = tk.Button(root, text="DOWN", width=12, height=3)
+        self.RightDecreaseY = tk.Button(root, text="DOWN", width=12, height=3, command=RightCornerDown)
         self.RightDecreaseY.grid(row=3, column=1)
-        self.RightIncreaseX = tk.Button(root, text="RIGHT", width=12, height=3)
+        self.RightIncreaseX = tk.Button(root, text="RIGHT", width=12, height=3, command=RightCornerRight)
         self.RightIncreaseX.grid(row=3, column=2)
-        self.RightDecreaseX = tk.Button(root, text="LEFT", width=12, height=3)
+        self.RightDecreaseX = tk.Button(root, text="LEFT", width=12, height=3, command=RightCornerLeft)
         self.RightDecreaseX.grid(row=3, column=3, padx=(0,10))
 
         self.ResetMessage = tk.Label(root, text="Press the reset button to remove the 3x3 grid.")
         self.ResetMessage.grid(row=4, column=0, columnspan=4, pady=(10,0))
 
         #Buttons
-        self.ResetButton = tk.Button(root, text="Reset", width=24, height=3)
+        self.ResetButton = tk.Button(root, text="Reset", width=24, height=3, command=ResetGrid)
         self.ResetButton.grid(row=5, column=0, columnspan=2)
-        self.HelpButton = tk.Button(root, text="Help", width=12, height=3)
+        self.HelpButton = tk.Button(root, text="Help", width=12, height=3, command=Help)
         self.HelpButton.grid(row=5, column=2, pady=10)
-        self.BackButton = tk.Button(root, text="Back", width=12, height=3)
+        self.BackButton = tk.Button(root, text="Back", width=12, height=3, command=Back)
         self.BackButton.grid(row=5, column=3, pady=10, padx=(0,10))
 
 class ControlPictureWindow:
