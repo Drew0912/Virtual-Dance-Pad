@@ -97,7 +97,7 @@ class VidCapture:
 
     def CropControl(self): #Crop Control Picture.
         im = cv2.imread("Control_picture.jpg") #Imports control picture.
-        self.imCrop1 = im[self.point1[1]:self.c, self.a:self.b]
+        self.imCrop1 = im[self.point1[1] + 1:self.c, self.a + 1:self.b]
         cv2.imshow("ImageCrop1", self.imCrop1)
 
 
