@@ -97,10 +97,9 @@ class VidCapture:
 
     def CropControl(self): #Crop Control Picture.
         im = cv2.imread("Control_picture.jpg") #Imports control picture.
+
         self.imCrop1 = im[self.point1[1] + 1:self.c, self.a + 1:self.b]
-        cv2.imshow("ImageCrop1", self.imCrop1)
-
-
+        #cv2.imshow("ImageCrop1", self.imCrop1)
 
         self.imCrop2 = im[self.c + 1:self.d, self.b + 1:self.point2[0]]
         #cv2.imshow("ImageCrop2", self.imCrop2)
@@ -109,10 +108,7 @@ class VidCapture:
         #cv2.imshow("ImageCrop3", self.imCrop3)
 
         self.imCrop4 = im[self.c + 1:self.d, self.point1[0] + 1:self.a]
-        #cv2.imshow("ImageCrop4", self.imCrop4)
-
-        #end = time.time()
-        #print(end - start)                            
+        #cv2.imshow("ImageCrop4", self.imCrop4)                         
 
 def main():
     cameraFeed = VidCapture() #Creates instance of VidCapture called cameraFeed.
