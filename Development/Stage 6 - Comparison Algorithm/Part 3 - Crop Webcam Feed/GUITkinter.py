@@ -312,7 +312,8 @@ class ControlPictureConfirmWindow:
 
         def Yes():
             self.TextLabel["text"] = "Close all windows but Main Calibration and Main Window"
-            cameraFeed.CropControl()        
+            cameraFeed.CropControl()
+            cameraFeed.setupfinish()        
 
         self.TextLabel = tk.Label(root, text="")
         self.TextLabel.grid(row=0, column=1, columnspan=2)    
