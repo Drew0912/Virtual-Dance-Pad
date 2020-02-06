@@ -113,7 +113,8 @@ class VidCapture:
         #cv2.imshow("ImageCrop4", self.imCrop4)
 
     def SetupFinishBool(self): #Boolean Flag.
-        self.setupfinish = True                              
+        self.setupfinish = True
+        print("Finished")                              
 
 def main():
     cameraFeed = VidCapture() #Creates instance of VidCapture called cameraFeed.
