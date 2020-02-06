@@ -10,7 +10,9 @@ class VidCapture:
         self.drawing = False #Boolean to know if user is drawing the rectangle.
         self.drawingfinish = False
 
-        self.takepicture = False
+        self.takepicture = False #Boolean flag for if picture is taken.
+
+        self.setupfinish = False #Boolean flag for if setup is finished.
 
         self.vid = cv2.VideoCapture(video_source) #Gets the webcam and puts it under the name vid.
         cv2.namedWindow(self.Name) #Initialises an OpenCV Window
@@ -108,7 +110,10 @@ class VidCapture:
         #cv2.imshow("ImageCrop3", self.imCrop3)
 
         self.imCrop4 = im[self.c + 1:self.d, self.point1[0] + 1:self.a]
-        #cv2.imshow("ImageCrop4", self.imCrop4)                         
+        #cv2.imshow("ImageCrop4", self.imCrop4)
+
+    def SetupFinishBool(self): #Boolean Flag.
+        self.setupfinish = True                              
 
 def main():
     cameraFeed = VidCapture() #Creates instance of VidCapture called cameraFeed.
