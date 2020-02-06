@@ -1,7 +1,7 @@
 import numpy as np #Additional maths functions
 import cv2 #OpenCV
 
-def mse(x, y):
+def mse(x, y): #Mean Squared Error
     return np.linalg.norm(x - y)
 
 def main():
