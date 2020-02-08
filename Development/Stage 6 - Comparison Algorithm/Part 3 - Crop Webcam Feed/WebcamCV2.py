@@ -2,7 +2,7 @@ import cv2 #Imports OpenCV.
 import numpy as np #Numpy is needed for OpenCV.
 
 class VidCapture:
-    def __init__(self, video_source=0):
+    def __init__(self, video_source=1):
         self.Name = "WebcamFeed" #Name for OpenCV Window.
 
         self.point1 = () #Tuple for first coordinate.
@@ -13,6 +13,8 @@ class VidCapture:
         self.takepicture = False #Boolean flag for if picture is taken.
 
         self.setupfinish = False #Boolean flag for if setup is finished.
+
+        self.n = 0 #Counter for frames
 
         self.vid = cv2.VideoCapture(video_source) #Gets the webcam and puts it under the name vid.
         cv2.namedWindow(self.Name) #Initialises an OpenCV Window
@@ -43,11 +45,11 @@ class VidCapture:
             self.takepicture = not self.takepicture
 
         if self.drawingfinish and self.setupfinish: #if setup and drawing are finished.
-            #self.n = self.n + 1
+            self.n = self.n + 1
 
             self.frameCrop1 = frame[self.point1[1] + 1:self.c, self.a + 1:self.b]
-            #cropname1 = "one " + str(self.n) + ".jpg"
-            #cv2.imwrite(cropname1, self.frameCrop1)
+            cropname1 = "one " + str(self.n) + ".jpg"
+            cv2.imwrite(cropname1, self.frameCrop1)
 
             self.frameCrop2 = frame[self.c + 1:self.d, self.b + 1:self.point2[0]]
             #cropname2 = "two " + str(self.n) + ".jpg"
