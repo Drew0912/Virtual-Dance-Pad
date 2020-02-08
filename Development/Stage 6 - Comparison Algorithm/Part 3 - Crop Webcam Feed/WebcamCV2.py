@@ -40,7 +40,26 @@ class VidCapture:
         if self.takepicture: #Save Control picture when Take picture is pressed.
             filename = "Control_picture.jpg"
             cv2.imwrite(filename, frame)
-            self.takepicture = not self.takepicture    
+            self.takepicture = not self.takepicture
+
+        if self.drawingfinish and self.setupfinish: #if setup and drawing are finished.
+            #self.n = self.n + 1
+
+            self.frameCrop1 = frame[self.point1[1] + 1:self.c, self.a + 1:self.b]
+            #cropname1 = "one " + str(self.n) + ".jpg"
+            #cv2.imwrite(cropname1, self.frameCrop1)
+
+            self.frameCrop2 = frame[self.c + 1:self.d, self.b + 1:self.point2[0]]
+            #cropname2 = "two " + str(self.n) + ".jpg"
+            #cv2.imwrite(cropname2, self.frameCrop2)
+
+            self.frameCrop3 = frame[self.d + 1:self.point2[1], self.a + 1:self.b]
+            #cropname3 = "three " + str(self.n) + ".jpg"
+            #cv2.imwrite(cropname3, self.frameCrop3)
+
+            self.frameCrop4 = frame[self.c + 1:self.d, self.point1[0] + 1:self.a]
+            #cropname4 = "four " + str(self.n) + ".jpg"
+            #cv2.imwrite(cropname4, self.frameCrop4)        
 
         cv2.imshow(self.Name, frame) #Creates window called WebcamFeed and displays frame from webcam.
 
