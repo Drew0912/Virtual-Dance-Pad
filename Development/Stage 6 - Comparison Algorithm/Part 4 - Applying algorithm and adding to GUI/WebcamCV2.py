@@ -1,6 +1,8 @@
 import cv2 #Imports OpenCV.
 import numpy as np #Numpy is needed for OpenCV.
 
+import Comparison #Comparison algorithms
+
 class VidCapture:
     def __init__(self, video_source=1):
         self.Name = "WebcamFeed" #Name for OpenCV Window.
