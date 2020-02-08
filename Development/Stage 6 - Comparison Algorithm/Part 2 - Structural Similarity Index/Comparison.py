@@ -13,7 +13,7 @@ def main():
     im1 = cv2.imread('Control_picture.jpg')
     im2 = cv2.imread('Control_picture1.jpg')
 
-    print(mse(im1, im2))
+    print(ssim(im1, im2))
 
 if __name__ == "__main__":
     main()        
