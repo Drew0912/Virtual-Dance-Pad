@@ -63,7 +63,21 @@ class VidCapture:
 
             self.frameCrop4 = frame[self.c + 1:self.d, self.point1[0] + 1:self.a]
             #cropname4 = "four " + str(self.n) + ".jpg"
-            #cv2.imwrite(cropname4, self.frameCrop4)        
+            #cv2.imwrite(cropname4, self.frameCrop4)
+            
+
+            self.one = Compare.ssim(self.imCrop1, self.frameCrop1)
+            #print("one: " + str(self.one))
+
+            self.two = Compare.ssim(self.imCrop2, self.frameCrop2)
+            #print("two: " + str(self.two))
+
+            self.three = Compare.ssim(self.imCrop3, self.frameCrop3)
+            #print("three: " + str(self.three))
+
+            self.four = Compare.ssim(self.imCrop4, self.frameCrop4)
+            #print("four: " + str(self.four))
+
 
         cv2.imshow(self.Name, frame) #Creates window called WebcamFeed and displays frame from webcam.
 
