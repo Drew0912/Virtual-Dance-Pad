@@ -10,8 +10,8 @@ def ssim(x, y):
     return structural_similarity(x, y)    
 
 def main():
-    im1 = cv2.imread('Control_picture.jpg')
-    im2 = cv2.imread('Control_picture1.jpg')
+    im1 = cv2.imread('Control_picture.jpg') #Read first image.
+    im2 = cv2.imread('Control_picture1.jpg') #Read second image.
 
     print(ssim(im1, im2))
 
