@@ -527,6 +527,12 @@ class Sensitivity:
         self.SaveButton = tk.Button(root, text="Save", width=5, command=Save)
         self.SaveButton.grid(row=4, column=3, sticky=tk.W+tk.E+tk.N+tk.S)
 
+        #Call updates.
+        self.DetectionOneLabel.after(500,UpdateOne)
+        self.DetectionTwoLabel.after(500,UpdateTwo)
+        self.DetectionThreeLabel.after(500,UpdateThree)
+        self.DetectionFourLabel.after(500,UpdateFour)
+
         self.root.mainloop()                             
 
 def main():
