@@ -100,7 +100,7 @@ class MainWindow(): #Main Window Class
                             self.ThreePress = not self.ThreePress
 
                 if self.Started: #Main box 4. Right
-                    if cameraFeed.four >= float(LowerFour) and cameraFeed.four <= float(UpperFour) and not self.fourPress:
+                    if cameraFeed.four >= float(LowerFour) and cameraFeed.four <= float(UpperFour) and not self.FourPress:
                         keyDown('d')
                         self.FourPress = not self.FourPress
                     elif self.FourPress:
