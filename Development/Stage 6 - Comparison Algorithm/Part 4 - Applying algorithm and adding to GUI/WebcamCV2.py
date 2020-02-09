@@ -4,7 +4,7 @@ import numpy as np #Numpy is needed for OpenCV.
 import Comparison #Comparison algorithms
 
 class VidCapture:
-    def __init__(self, video_source=1):
+    def __init__(self, video_source=0):
         self.Name = "WebcamFeed" #Name for OpenCV Window.
 
         self.point1 = () #Tuple for first coordinate.
@@ -66,16 +66,16 @@ class VidCapture:
             #cv2.imwrite(cropname4, self.frameCrop4)
             
 
-            self.one = Compare.ssim(self.imCrop1, self.frameCrop1)
+            self.one = Comparison.ssim(self.imCrop1, self.frameCrop1)
             #print("one: " + str(self.one))
 
-            self.two = Compare.ssim(self.imCrop2, self.frameCrop2)
+            self.two = Comparison.ssim(self.imCrop2, self.frameCrop2)
             #print("two: " + str(self.two))
 
-            self.three = Compare.ssim(self.imCrop3, self.frameCrop3)
+            self.three = Comparison.ssim(self.imCrop3, self.frameCrop3)
             #print("three: " + str(self.three))
 
-            self.four = Compare.ssim(self.imCrop4, self.frameCrop4)
+            self.four = Comparison.ssim(self.imCrop4, self.frameCrop4)
             #print("four: " + str(self.four))
 
 
