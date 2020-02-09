@@ -72,14 +72,41 @@ class MainWindow(): #Main Window Class
             while(True):
                 cameraFeed.showFrame()
 
-                if self.Started: #Main box 1.
+                if self.Started: #Main box 1. Front
                     if cameraFeed.one >= float(LowerOne) and cameraFeed.one <= float(UpperOne) and not self.OnePress:
                         keyDown('s')
                         self.OnePress = not self.OnePress
                     elif self.OnePress:
                         if cameraFeed.one < float(LowerOne) or cameraFeed.one > float(UpperOne):
                             keyUp('s')
-                            self.OnePress = not self.OnePress 
+                            self.OnePress = not self.OnePress
+
+                if self.Started: #Main box 2. Left
+                    if cameraFeed.two >= float(LowerTwo) and cameraFeed.two <= float(UpperTwo) and not self.TwoPress:
+                        keyDown('a')
+                        self.TwoPress = not self.TwoPress
+                    elif self.TwoPress:
+                        if cameraFeed.two < float(LowerTwo) or cameraFeed.two > float(UpperTwo):
+                            keyUp('a')
+                            self.TwoPress = not self.TwoPress
+
+                if self.Started: #Main box 3. Back
+                    if cameraFeed.three >= float(LowerThree) and cameraFeed.three <= float(UpperThree) and not self.ThreePress:
+                        keyDown('w')
+                        self.ThreePress = not self.ThreePress
+                    elif self.ThreePress:
+                        if cameraFeed.three < float(LowerThree) or cameraFeed.three > float(UpperThree):
+                            keyUp('w')
+                            self.ThreePress = not self.ThreePress
+
+                if self.Started: #Main box 4. Right
+                    if cameraFeed.four >= float(LowerFour) and cameraFeed.four <= float(UpperFour) and not self.fourPress:
+                        keyDown('d')
+                        self.FourPress = not self.FourPress
+                    elif self.FourPress:
+                        if cameraFeed.four < float(LowerFour) or cameraFeed.four > float(UpperFour):
+                            keyUp('d')
+                            self.FourPress = not self.FourPress                                     
 
 
                 if cv2.waitKey(20) == 27: #Press esc to exit.
