@@ -454,7 +454,23 @@ class Sensitivity:
                 else:
                     print("Error")
             else:
-                print("Error")                        
+                print("Error")
+
+        def UpdateOne():
+            self.DetectionOneLabel.config(text=str(cameraFeed.one))
+            self.DetectionOneLabel.after(500,UpdateOne)
+
+        def UpdateTwo():
+            self.DetectionTwoLabel.config(text=str(cameraFeed.two))
+            self.DetectionTwoLabel.after(500,UpdateTwo)
+
+        def UpdateThree():
+            self.DetectionThreeLabel.config(text=str(cameraFeed.three))
+            self.DetectionThreeLabel.after(500,UpdateThree)
+
+        def UpdateFour():
+            self.DetectionFourLabel.config(text=str(cameraFeed.four))
+            self.DetectionFourLabel.after(500,UpdateFour)                                
 
         #Second row Labels
         self.DetectionLabel = tk.Label(root, text="Detection Value:")
