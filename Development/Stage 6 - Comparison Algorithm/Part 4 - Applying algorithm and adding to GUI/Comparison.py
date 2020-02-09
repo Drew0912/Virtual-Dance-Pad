@@ -7,7 +7,7 @@ def mse(x, y): #Mean Squared Error
     return np.linalg.norm(x - y)
 
 def ssim(x, y):
-    return structural_similarity(x, y)    
+    return structural_similarity(x, y, multichannel=True)    
 
 def main():
     im1 = cv2.imread('Control_picture.jpg')
