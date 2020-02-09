@@ -15,6 +15,8 @@ from PIL import Image, ImageTk #Python Imaging Library
 
 import time #Time functions
 
+from pyautogui import keyDown, keyUp #Keyboard inputs.
+
 class MainWindow(): #Main Window Class
     def __init__(self, root):
         self.root = root
