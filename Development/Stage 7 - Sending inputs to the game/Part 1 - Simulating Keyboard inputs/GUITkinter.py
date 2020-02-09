@@ -36,10 +36,19 @@ class MainWindow(): #Main Window Class
         LowerThree = "Set Value"
         LowerFour = "Set Value"
 
+        self.Started = False
+
+        self.OnePress = False
+        self.TwoPress = False
+        self.ThreePress = False
+        self.FourPress = False
+
         def StartStop(): #Changes text of Button when pressed.
             if self.StartStopButton["text"] == "Start":
+                self.Started = True
                 self.StartStopButton["text"] = "Stop"
             else:
+                self.Started = False
                 self.StartStopButton["text"] = "Start"
 
         def Help(): #Opens HTML file.
@@ -62,6 +71,17 @@ class MainWindow(): #Main Window Class
             close = False
             while(True):
                 cameraFeed.showFrame()
+
+                if self.Started: #Main box 1.
+                    if cameraFeed.one >= float(LowerOne) and cameraFeed.one <= float(UpperOne) and not self.OnePress:
+                        keyDown('s')
+                        self.OnePress = not self.OnePress
+                    elif self.OnePress:
+                        if cameraFeed.one < float(LowerOne) or cameraFeed.one > float(UpperOne):
+                            keyUp('s')
+                            self.OnePress = not self.OnePress 
+
+
                 if cv2.waitKey(20) == 27: #Press esc to exit.
                     self.WebcamOpen = not self.WebcamOpen
                     break
