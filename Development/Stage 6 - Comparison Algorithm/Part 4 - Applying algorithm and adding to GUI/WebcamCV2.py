@@ -67,16 +67,16 @@ class VidCapture:
             
 
             self.one = Comparison.ssim(self.imCrop1, self.frameCrop1)
-            #print("one: " + str(self.one))
+            print("one: " + str(self.one))
 
             self.two = Comparison.ssim(self.imCrop2, self.frameCrop2)
-            #print("two: " + str(self.two))
+            print("two: " + str(self.two))
 
             self.three = Comparison.ssim(self.imCrop3, self.frameCrop3)
-            #print("three: " + str(self.three))
+            print("three: " + str(self.three))
 
             self.four = Comparison.ssim(self.imCrop4, self.frameCrop4)
-            #print("four: " + str(self.four))
+            print("four: " + str(self.four))
 
 
         cv2.imshow(self.Name, frame) #Creates window called WebcamFeed and displays frame from webcam.
