@@ -4,7 +4,7 @@ import numpy as np #Numpy is needed for OpenCV.
 import Comparison #Comparison algorithms
 
 class VidCapture:
-    def __init__(self, video_source=0):
+    def __init__(self, video_source):
         self.Name = "WebcamFeed" #Name for OpenCV Window.
 
         self.point1 = () #Tuple for first coordinate.

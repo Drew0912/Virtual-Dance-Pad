@@ -17,6 +17,8 @@ import time #Time functions
 
 from pyautogui import keyDown, keyUp #Keyboard inputs.
 
+import WebcamList #List of webcams.
+
 class MainWindow(): #Main Window Class
     def __init__(self, root):
         self.root = root
@@ -65,7 +67,7 @@ class MainWindow(): #Main Window Class
         def Webcam():
             self.WebcamOpen = True
             global cameraFeed
-            cameraFeed = WebcamCV2.VidCapture()
+            cameraFeed = WebcamCV2.VidCapture(int(self.WebcamSelect.get()))
             cv2.setMouseCallback(cameraFeed.Name, cameraFeed.Click)
             global close
             close = False
@@ -133,12 +135,7 @@ class MainWindow(): #Main Window Class
         T1.daemon = True #Close Webcam if GUi is closed                            
 
         self.WebcamSelect = ttk.Combobox(root, width=30, state='readonly',
-                            values=[
-                                "Select which Webcam:",
-                                "0",
-                                "1",
-                                "2",
-                                "3",])
+                            values=WebcamList.listWebcam())
         self.WebcamSelect.grid(row=0, column=0, columnspan=2, pady=(20,10))
         self.WebcamSelect.current(0) #This sets the displayed value of the ComboBox.
         self.Message = tk.Label(root, text="") #Spare Label to give message to user on input.

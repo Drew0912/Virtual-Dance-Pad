@@ -3,7 +3,7 @@ import numpy as np
 
 def listWebcam():
     index = 0 #Camera index
-    arr = [] #List
+    arr = ["Select which Webcam:"] #List
     while True:
         cap = cv2.VideoCapture(index) #Import webcam with selected index.
         if not cap.read()[0]: #If selected webcam cannot be opened.
