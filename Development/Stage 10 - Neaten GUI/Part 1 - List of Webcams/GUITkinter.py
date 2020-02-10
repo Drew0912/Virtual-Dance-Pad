@@ -121,7 +121,9 @@ class MainWindow(): #Main Window Class
             cv2.destroyAllWindows()
 
         def WebcamClick(): #Function to load Webcam function.
-            if self.DisplayButton["text"] == "Open Webcam":
+            if self.WebcamSelect.get() == "Select which Webcam:":
+                self.Message["text"] = "Select which webcam to use."
+            elif self.DisplayButton["text"] == "Open Webcam":
                 T1.start() #Start thread.
                 self.DisplayButton["text"] = "Close Webcam. \n Requires restart after close."
             else:
