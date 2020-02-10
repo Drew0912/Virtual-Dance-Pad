@@ -52,7 +52,7 @@ class MainWindow(): #Main Window Class
                 self.StartStopButton["text"] = "Start"
 
         def Help(): #Opens HTML file.
-            url = 'file://' + os.path.realpath('index.html')
+            url = 'file://' + os.path.realpath('Help.html')
             webbrowser.open(url)
 
         def CalibrationWindow(): #Open Main Calibration window
@@ -74,11 +74,11 @@ class MainWindow(): #Main Window Class
 
                 if self.Started: #Main box 1. Front
                     if cameraFeed.one >= float(LowerOne) and cameraFeed.one <= float(UpperOne) and not self.OnePress:
-                        keyDown('s')
+                        keyDown('w')
                         self.OnePress = not self.OnePress
                     elif self.OnePress:
                         if cameraFeed.one < float(LowerOne) or cameraFeed.one > float(UpperOne):
-                            keyUp('s')
+                            keyUp('w')
                             self.OnePress = not self.OnePress
 
                 if self.Started: #Main box 2. Left
@@ -92,11 +92,11 @@ class MainWindow(): #Main Window Class
 
                 if self.Started: #Main box 3. Back
                     if cameraFeed.three >= float(LowerThree) and cameraFeed.three <= float(UpperThree) and not self.ThreePress:
-                        keyDown('w')
+                        keyDown('s')
                         self.ThreePress = not self.ThreePress
                     elif self.ThreePress:
                         if cameraFeed.three < float(LowerThree) or cameraFeed.three > float(UpperThree):
-                            keyUp('w')
+                            keyUp('s')
                             self.ThreePress = not self.ThreePress
 
                 if self.Started: #Main box 4. Right
@@ -169,7 +169,7 @@ class MainCalibration: #Main Calibration Class
             self.SetupApp = Setup(self.SetupWindow)
 
         def Help(): #Opens HTML file.
-            url = 'file://' + os.path.realpath('index.html')
+            url = 'file://' + os.path.realpath('Help.html')
             webbrowser.open(url)
 
         def Finish(): #Closes current window.
@@ -210,7 +210,7 @@ class Setup:
             self.root.destroy()
 
         def Help():
-            url = 'file://' + os.path.realpath('index.html')
+            url = 'file://' + os.path.realpath('Help.html')
             webbrowser.open(url)
 
         def OpenAdjust():
@@ -246,7 +246,7 @@ class Adjust:
         self.root.resizable(0,0) #The window created cannot change size. 
 
         def Help():
-            url = 'file://' + os.path.realpath('index.html') #change url
+            url = 'file://' + os.path.realpath('Help.html') #change url
             webbrowser.open(url)
 
         def Back():
@@ -319,7 +319,7 @@ class ControlPictureWindow:
             self.root.destroy()
 
         def Help():
-            url = 'file://' + os.path.realpath('index.html')
+            url = 'file://' + os.path.realpath('Help.html')
             webbrowser.open(url)
 
         def TakePicture():
@@ -353,7 +353,7 @@ class ControlPictureConfirmWindow:
         self.panel.grid(row=0, column=0, rowspan=4)
 
         def Help():
-            url = 'file://' + os.path.realpath('index.html') #change url
+            url = 'file://' + os.path.realpath('Help.html') #change url
             webbrowser.open(url)
 
         def Retake():
