@@ -72,13 +72,13 @@ class MainWindow(): #Main Window Class
             while(True):
                 cameraFeed.showFrame()
 
-                if self.Started: #Main box 1. Front
+                if self.Started: #Main box 1. Back
                     if cameraFeed.one >= float(LowerOne) and cameraFeed.one <= float(UpperOne) and not self.OnePress:
-                        keyDown('w')
+                        keyDown('s')
                         self.OnePress = not self.OnePress
                     elif self.OnePress:
                         if cameraFeed.one < float(LowerOne) or cameraFeed.one > float(UpperOne):
-                            keyUp('w')
+                            keyUp('s')
                             self.OnePress = not self.OnePress
 
                 if self.Started: #Main box 2. Left
@@ -90,13 +90,13 @@ class MainWindow(): #Main Window Class
                             keyUp('a')
                             self.TwoPress = not self.TwoPress
 
-                if self.Started: #Main box 3. Back
+                if self.Started: #Main box 3. Front
                     if cameraFeed.three >= float(LowerThree) and cameraFeed.three <= float(UpperThree) and not self.ThreePress:
-                        keyDown('s')
+                        keyDown('w')
                         self.ThreePress = not self.ThreePress
                     elif self.ThreePress:
                         if cameraFeed.three < float(LowerThree) or cameraFeed.three > float(UpperThree):
-                            keyUp('s')
+                            keyUp('w')
                             self.ThreePress = not self.ThreePress
 
                 if self.Started: #Main box 4. Right
