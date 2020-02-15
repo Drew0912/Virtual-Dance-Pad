@@ -326,24 +326,18 @@ class ControlPictureWindow:
         def TakePicture():
             cameraFeed.TakePicture()
 
-            time.sleep(2) #Delay by 2 seconds
+            time.sleep(1) #Delay by 1 seconds
             self.ConfirmWindow = tk.Toplevel(self.root)
             self.Confirm = ControlPictureConfirmWindow(self.ConfirmWindow)
 
         def Countdown():
-                self.count = self.count - 1
-                self.CountdownLabel.config(text=str(self.count))
-                #self.count = self.count - 1
-                print(self.count)
+                self.count = self.count - 1 #Starts at 5
+                self.CountdownLabel.config(text=str(self.count)) #Change label text.
                 if self.count > 0:
-                    self.CountdownLabel.after(1000,Countdown)
+                    self.CountdownLabel.after(1000,Countdown) #Repeat function every second.
                 elif self.count == 0:
                     TakePicture()    
   
-
-
-
-
         self.Label = tk.Label(root, text="Makes sure that the image displayed on the webcam feed\n is clear and that the user is standing on the center box of the 3x3 grid.")
         self.Label.grid(row=0, column=0, columnspan=2, pady=10, padx=10)
         self.BackButton = tk.Button(root, text="Back", width=15, height=5, command=Back)
