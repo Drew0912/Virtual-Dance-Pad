@@ -125,7 +125,8 @@ class MainWindow(): #Main Window Class
 
         def WebcamClick(): #Function to load Webcam function.
             if self.WebcamSelect.get() == "Select which Webcam:":
-                self.Message["text"] = "Select which webcam to use."
+                #self.Message["text"] = "Select which webcam to use."
+                alert(text='Select which webcam to use from the drop down menu.', title='Select Webcam', button='OK') #Message box
             elif self.DisplayButton["text"] == "Open Webcam":
                 T1.start() #Start thread.
                 self.DisplayButton["text"] = "Close Webcam. \n Requires restart after close."
@@ -143,8 +144,8 @@ class MainWindow(): #Main Window Class
                             values=WebcamList.listWebcam())
         self.WebcamSelect.grid(row=0, column=0, columnspan=2, pady=(20,10))
         self.WebcamSelect.current(0) #This sets the displayed value of the ComboBox.
-        self.Message = tk.Label(root, text="") #Spare Label to give message to user on input.
-        self.Message.grid(row=1, column=0, columnspan=2)
+        #self.Message = tk.Label(root, text="") #Spare Label to give message to user on input.
+        #self.Message.grid(row=1, column=0, columnspan=2)
         self.DisplayButton = tk.Button(root, text="Open Webcam", width=30, height=5, command=WebcamClick)
         self.DisplayButton.grid(row=2, column=0, columnspan=2)
         self.StartStopButton = tk.Button(root, text="Start", width=30, height=5, command=StartStop)
@@ -224,7 +225,8 @@ class Setup:
             self.Control = ControlPictureWindow(self.ControlWindow)
 
         def ResetGrid():
-            cameraFeed.Reset()    
+            cameraFeed.Reset()
+            alert(text='The webcam feed has been reset.', title='Reset', button='OK')    
 
         self.Label = tk.Label(root, text="Click on the webcam feed to create 2 corners. \n One in the top left and the other in the bottom right of where you want the 3x3 grid.")
         self.Label.grid(row=0, column=0, columnspan=2, pady=(5,0))
@@ -272,7 +274,8 @@ class Adjust:
             cameraFeed.RightCornerLeft() 
 
         def ResetGrid():
-            cameraFeed.Reset()    
+            cameraFeed.Reset()
+            alert(text='The webcam feed has been reset.', title='Reset', button='OK')    
 
         #First Corner
         self.FirstLabel = tk.Label(root, text="Top Left Corner:")
@@ -350,7 +353,7 @@ class ControlPictureWindow:
         self.TakePictureButton = tk.Button(root, text="Take Picture", width=15, height=5, command=Countdown)
         self.TakePictureButton.grid(row=2, column=0, sticky=tk.W+tk.E+tk.N+tk.S, padx=(20,0), pady=(0,20))
 
-        self.CountdownLabel = tk.Label(root, text="test")
+        self.CountdownLabel = tk.Label(root, text="")
         self.CountdownLabel.grid(row=1, column=0)
 
         self.root.mainloop
@@ -375,6 +378,7 @@ class ControlPictureConfirmWindow:
             self.root.destroy()
 
         def Yes():
+            alert(text='Close all windows but Main Calibration and Main Window', title='Finish', button='OK') #Message box.
             self.TextLabel["text"] = "Close all windows but Main Calibration and Main Window"
             cameraFeed.CropControl()
             cameraFeed.SetupFinishBool()        
@@ -481,60 +485,60 @@ class Sensitivity:
                 if float(self.UpperOneEntry.get()) >= 0 and float(self.UpperOneEntry.get()) <= 1: #Check between 1 and 0
                     UpperOne = self.UpperOneEntry.get()
                 else:
-                    print("Error")
+                    alert(text='Value in Upper limit for box one is not between 1 and 0', title='Validation', button='OK')
             else:
-                print("Error")
+                alert(text='Value in Upper limit for box one is not a real number', title='Validation', button='OK')
             if CheckFloat.CheckFloat(self.UpperTwoEntry.get()) == True: #Check input is float
                 if float(self.UpperTwoEntry.get()) >= 0 and float(self.UpperTwoEntry.get()) <= 1: #Check between 1 and 0
                     UpperTwo = self.UpperTwoEntry.get()
                 else:
-                    print("Error")
+                    alert(text='Value in Upper limit for box two is not between 1 and 0', title='Validation', button='OK')
             else:
-                print("Error")
+                alert(text='Value in Upper limit for box two is not a real number', title='Validation', button='OK')
             if CheckFloat.CheckFloat(self.UpperThreeEntry.get()) == True: #Check input is float
                 if float(self.UpperThreeEntry.get()) >= 0 and float(self.UpperThreeEntry.get()) <= 1: #Check between 1 and 0
                     UpperThree = self.UpperThreeEntry.get()
                 else:
-                    print("Error")
+                    alert(text='Value in Upper limit for box three is not between 1 and 0', title='Validation', button='OK')
             else:
-                print("Error")
+                alert(text='Value in Upper limit for box three is not a real number', title='Validation', button='OK')
             if CheckFloat.CheckFloat(self.UpperFourEntry.get()) == True: #Check input is float
                 if float(self.UpperFourEntry.get()) >= 0 and float(self.UpperFourEntry.get()) <= 1: #Check between 1 and 0
                     UpperFour = self.UpperFourEntry.get()
                 else:
-                    print("Error")
+                    alert(text='Value in Upper limit for box four is not between 1 and 0', title='Validation', button='OK')
             else:
-                print("Error")
+                alert(text='Value in Upper limit for box four is not a real number', title='Validation', button='OK')
 
             #Lower limits
             if CheckFloat.CheckFloat(self.LowerOneEntry.get()) == True: #Check input is float
                 if float(self.LowerOneEntry.get()) >= 0 and float(self.LowerOneEntry.get()) <= 1: #Check between 1 and 0
                     LowerOne = self.LowerOneEntry.get()
                 else:
-                    print("Error")
+                    alert(text='Value in Lower limit for box one is not between 1 and 0', title='Validation', button='OK')
             else:
-                print("Error")
+                alert(text='Value in Lower limit for box one is not a real number', title='Validation', button='OK')
             if CheckFloat.CheckFloat(self.LowerTwoEntry.get()) == True: #Check input is float
                 if float(self.LowerTwoEntry.get()) >= 0 and float(self.LowerTwoEntry.get()) <= 1: #Check between 1 and 0
                     LowerTwo = self.LowerTwoEntry.get()
                 else:
-                    print("Error")
+                    alert(text='Value in Lower limit for box two is not between 1 and 0', title='Validation', button='OK')
             else:
-                print("Error")
+                alert(text='Value in Lower limit for box two is not a real number', title='Validation', button='OK')
             if CheckFloat.CheckFloat(self.LowerThreeEntry.get()) == True: #Check input is float
                 if float(self.LowerThreeEntry.get()) >= 0 and float(self.LowerThreeEntry.get()) <= 1: #Check between 1 and 0
                     LowerThree = self.LowerThreeEntry.get()
                 else:
-                    print("Error")
+                    alert(text='Value in Lower limit for box three is not between 1 and 0', title='Validation', button='OK')
             else:
-                print("Error")
+                alert(text='Value in Lower limit for box three is not a real number', title='Validation', button='OK')
             if CheckFloat.CheckFloat(self.LowerFourEntry.get()) == True: #Check input is float
                 if float(self.LowerFourEntry.get()) >= 0 and float(self.LowerFourEntry.get()) <= 1: #Check between 1 and 0
                     LowerFour = self.LowerFourEntry.get()
                 else:
-                    print("Error")
+                    alert(text='Value in Lower limit for box four is not between 1 and 0', title='Validation', button='OK')
             else:
-                print("Error")
+                alert(text='Value in Lower limit for box four is not a real number', title='Validation', button='OK')
 
         #Second row Labels
         self.DetectionLabel = tk.Label(root, text="Detection Value:")
