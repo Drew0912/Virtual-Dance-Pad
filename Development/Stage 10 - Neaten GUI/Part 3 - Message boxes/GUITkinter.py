@@ -64,7 +64,7 @@ class MainWindow(): #Main Window Class
                 self.newwindow = tk.Toplevel(self.root)
                 self.app = MainCalibration(self.newwindow)
             else:
-                self.Message["text"] = "Open Webcam first."
+                #self.Message["text"] = "Open Webcam first."
                 alert(text='Open Webcam first.', title='Webcam', button='OK') #Message box.   
 
         def Webcam():
