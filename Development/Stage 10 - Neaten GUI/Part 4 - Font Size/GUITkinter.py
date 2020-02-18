@@ -473,47 +473,63 @@ class Configure:
         self.root.title("Configure") #Title of the Window.
         self.root.resizable(0,0) #The window created cannot change size. 
 
+        #Front
         self.FrontLabel = tk.Label(root, text="Front:")
+        self.FrontLabel['font'] = myFont
         self.FrontLabel.grid(row=0, column=0)
-        self.FrontSelect = ttk.Combobox(root, width=15, state='readonly',
+
+        self.FrontSelect = ttk.Combobox(root, width=12, state='readonly',
                                          values=[
                                              "1",
                                              "2",
                                              "3",
                                              "4",])
+        self.FrontSelect['font'] = myFont                                     
         self.FrontSelect.grid(row=1, column=0)
         self.FrontSelect.current(0)
 
+        #Right
         self.RightLabel = tk.Label(root, text="Right:")
+        self.RightLabel['font'] = myFont
         self.RightLabel.grid(row=0, column=1)
-        self.RightSelect = ttk.Combobox(root, width=15, state='readonly',
+
+        self.RightSelect = ttk.Combobox(root, width=12, state='readonly',
                                          values=[
                                              "1",
                                              "2",
                                              "3",
                                              "4",])
+        self.RightSelect['font'] = myFont                                     
         self.RightSelect.grid(row=1, column=1)
         self.RightSelect.current(1)
 
+        #Left
         self.LeftLabel = tk.Label(root, text="Left:")
+        self.LeftLabel['font'] = myFont
         self.LeftLabel.grid(row=2, column=0)
-        self.LeftSelect = ttk.Combobox(root, width=15, state='readonly',
+
+        self.LeftSelect = ttk.Combobox(root, width=12, state='readonly',
                                          values=[
                                              "1",
                                              "2",
                                              "3",
                                              "4",])
+        self.LeftSelect['font'] = myFont                                     
         self.LeftSelect.grid(row=3, column=0)
         self.LeftSelect.current(2)
 
+        #Back
         self.BackLabel = tk.Label(root, text="Back:")
+        self.BackLabel['font'] = myFont
         self.BackLabel.grid(row=2, column=1)
-        self.BackSelect = ttk.Combobox(root, width=15, state='readonly',
+
+        self.BackSelect = ttk.Combobox(root, width=12, state='readonly',
                                          values=[
                                              "1",
                                              "2",
                                              "3",
                                              "4",])
+        self.BackSelect['font'] = myFont                                     
         self.BackSelect.grid(row=3, column=1)
         self.BackSelect.current(3)
 
@@ -523,16 +539,27 @@ class Sensitivity:
         self.root.title("Sensitivity") #Title of the Window.
         self.root.resizable(0,0) #The window created cannot change size.
 
+        self.SensitivityFontSize = font.Font(size='22', family='Comic Sans MS')
+
         #First row Labels
         self.BoxLabel = tk.Label(root, text="Box:")
+        self.BoxLabel['font'] = self.SensitivityFontSize
         self.BoxLabel.grid(row=0, column=0)
+
         self.OneLabel = tk.Label(root, text="One")
+        self.OneLabel['font'] = self.SensitivityFontSize
         self.OneLabel.grid(row=0, column=1)
+
         self.TwoLabel = tk.Label(root, text="Two")
+        self.TwoLabel['font'] = self.SensitivityFontSize
         self.TwoLabel.grid(row=0, column=2)
+
         self.ThreeLabel = tk.Label(root, text="Three")
+        self.ThreeLabel['font'] = self.SensitivityFontSize
         self.ThreeLabel.grid(row=0, column=3)
+
         self.FourLabel = tk.Label(root, text="Four")
+        self.FourLabel['font'] = self.SensitivityFontSize
         self.FourLabel.grid(row=0, column=4)
 
         def UpdateOne():
@@ -615,58 +642,86 @@ class Sensitivity:
 
         #Second row Labels
         self.DetectionLabel = tk.Label(root, text="Detection Value:")
+        self.DetectionLabel['font'] = self.SensitivityFontSize
         self.DetectionLabel.grid(row=1, column=0)
+
         self.DetectionOneLabel = tk.Label(root, text="...", borderwidth=2, relief='ridge')
+        self.DetectionOneLabel['font'] = self.SensitivityFontSize
         self.DetectionOneLabel.grid(row=1, column=1)
+
         self.DetectionTwoLabel = tk.Label(root, text="...", borderwidth=2, relief='ridge')
+        self.DetectionTwoLabel['font'] = self.SensitivityFontSize
         self.DetectionTwoLabel.grid(row=1, column=2)
+
         self.DetectionThreeLabel = tk.Label(root, text="...", borderwidth=2, relief='ridge')
+        self.DetectionThreeLabel['font'] = self.SensitivityFontSize
         self.DetectionThreeLabel.grid(row=1, column=3)
+
         self.DetectionFourLabel = tk.Label(root, text="...", borderwidth=2, relief='ridge')
+        self.DetectionFourLabel['font'] = self.SensitivityFontSize
         self.DetectionFourLabel.grid(row=1, column=4)
 
         #Third row Labels and Entry widgets
         self.UpperLimitLabel = tk.Label(root, text="Upper Limit:")
+        self.UpperLimitLabel['font'] = self.SensitivityFontSize
         self.UpperLimitLabel.grid(row=2, column=0)
+
         self.UpperOneEntryText = StringVar()
         self.UpperOneEntry = tk.Entry(root, textvariable=self.UpperOneEntryText)
         self.UpperOneEntryText.set(UpperOne)
+        self.UpperOneEntry['font'] = self.SensitivityFontSize
         self.UpperOneEntry.grid(row=2, column=1)
+
         self.UpperTwoEntryText = StringVar()
         self.UpperTwoEntry = tk.Entry(root, textvariable=self.UpperTwoEntryText)
         self.UpperTwoEntryText.set(UpperTwo)
+        self.UpperTwoEntry['font'] = self.SensitivityFontSize
         self.UpperTwoEntry.grid(row=2, column=2)
+        
         self.UpperThreeEntryText = StringVar()
         self.UpperThreeEntry = tk.Entry(root, textvariable=self.UpperThreeEntryText)
         self.UpperThreeEntryText.set(UpperThree)
+        self.UpperThreeEntry['font'] = self.SensitivityFontSize
         self.UpperThreeEntry.grid(row=2, column=3)
+
         self.UpperFourEntryText = StringVar()
         self.UpperFourEntry = tk.Entry(root, textvariable=self.UpperFourEntryText)
         self.UpperFourEntryText.set(UpperFour)
+        self.UpperFourEntry['font'] = self.SensitivityFontSize
         self.UpperFourEntry.grid(row=2, column=4)
 
         #Fourth row Labels and Entry widgets
         self.LowerLimitLabel = tk.Label(root, text="Lower Limit:")
+        self.LowerLimitLabel['font'] = self.SensitivityFontSize
         self.LowerLimitLabel.grid(row=3, column=0)
+
         self.LowerOneEntryText = StringVar()
         self.LowerOneEntry = tk.Entry(root, textvariable=self.LowerOneEntryText)
         self.LowerOneEntryText.set(LowerOne)
+        self.LowerOneEntry['font'] = self.SensitivityFontSize
         self.LowerOneEntry.grid(row=3, column=1)
+
         self.LowerTwoEntryText = StringVar()
         self.LowerTwoEntry = tk.Entry(root, textvariable=self.LowerTwoEntryText)
         self.LowerTwoEntryText.set(LowerTwo)
+        self.LowerTwoEntry['font'] = self.SensitivityFontSize
         self.LowerTwoEntry.grid(row=3, column=2)
+
         self.LowerThreeEntryText = StringVar()
         self.LowerThreeEntry = tk.Entry(root, textvariable=self.LowerThreeEntryText)
         self.LowerThreeEntryText.set(LowerThree)
+        self.LowerThreeEntry['font'] = self.SensitivityFontSize
         self.LowerThreeEntry.grid(row=3, column=3)
+
         self.LowerFourEntryText = StringVar()
         self.LowerFourEntry = tk.Entry(root, textvariable=self.LowerFourEntryText)
         self.LowerFourEntryText.set(LowerFour)
+        self.LowerFourEntry['font'] = self.SensitivityFontSize
         self.LowerFourEntry.grid(row=3, column=4)
 
-        self.SaveButton = tk.Button(root, text="Save", width=5, command=Save)
-        self.SaveButton.grid(row=4, column=3, sticky=tk.W+tk.E+tk.N+tk.S)
+        self.SaveButton = tk.Button(root, text="Save", command=Save)
+        self.SaveButton['font'] = self.SensitivityFontSize
+        self.SaveButton.grid(row=4, column=3, sticky=tk.W+tk.E+tk.N+tk.S, pady=(10))
 
         #Call updates.
         self.DetectionOneLabel.after(500,UpdateOne)
