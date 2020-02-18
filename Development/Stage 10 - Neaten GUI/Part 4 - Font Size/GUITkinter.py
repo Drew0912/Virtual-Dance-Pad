@@ -430,10 +430,10 @@ class ControlPictureConfirmWindow:
 
         self.panel = tk.Label(root, image = self.img) #Label showing image.
         self.panel.image = self.img
-        self.panel.grid(row=0, column=0, rowspan=4)
+        self.panel.grid(row=0, column=0, rowspan=4, padx=10, pady=10)
 
         def Help():
-            url = 'file://' + os.path.realpath('Help.html') #change url
+            url = 'file://' + os.path.realpath('Help.html')
             webbrowser.open(url)
 
         def Retake():
@@ -443,18 +443,29 @@ class ControlPictureConfirmWindow:
             alert(text='Close all windows but Main Calibration and Main Window', title='Finish', button='OK') #Message box.
             self.TextLabel["text"] = "Close all windows but Main Calibration and Main Window"
             cameraFeed.CropControl()
-            cameraFeed.SetupFinishBool()        
+            cameraFeed.SetupFinishBool()
+
+        self.fontSize = font.Font(size='18', family='Comic Sans MS')            
 
         self.TextLabel = tk.Label(root, text="")
-        self.TextLabel.grid(row=0, column=1, columnspan=2)    
+        self.TextLabel['font'] = self.fontSize
+        self.TextLabel.grid(row=0, column=1, columnspan=2)
+
         self.Label = tk.Label(root, text="Is this Control picture suitable?")
+        self.Label['font'] = self.fontSize
         self.Label.grid(row=1, column=1, columnspan=2)
-        self.RetakeButton = tk.Button(root, text="Retake", width=15, height=5, command=Retake)
-        self.RetakeButton.grid(row=2, column=2)
-        self.YesButton = tk.Button(root, text="Yes", width=15, height=5, command=Yes)
-        self.YesButton.grid(row=3, column=1)
-        self.HelpButton = tk.Button(root, text="Help", width=15, height=5, command=Help)
-        self.HelpButton.grid(row=3, column=2)                 
+
+        self.RetakeButton = tk.Button(root, text="Retake", height=2, command=Retake)
+        self.RetakeButton['font'] = myFont
+        self.RetakeButton.grid(row=2, column=2, sticky=tk.W+tk.E+tk.N+tk.S, padx=(0,10), pady=(0,10))
+
+        self.YesButton = tk.Button(root, text="Yes", height=2, command=Yes)
+        self.YesButton['font'] = myFont
+        self.YesButton.grid(row=3, column=1, sticky=tk.W+tk.E+tk.N+tk.S, pady=(0,10))
+
+        self.HelpButton = tk.Button(root, text="Help", height=2, command=Help)
+        self.HelpButton['font'] = myFont
+        self.HelpButton.grid(row=3, column=2, sticky=tk.W+tk.E+tk.N+tk.S, padx=(0,10), pady=(0,10))                 
 
 class Configure:
     def __init__(self, root):
