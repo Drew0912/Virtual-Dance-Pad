@@ -246,16 +246,27 @@ class Setup:
             alert(text='The webcam feed has been reset.', title='Reset', button='OK')    
 
         self.Label = tk.Label(root, text="Click on the webcam feed to create 2 corners. \n One in the top left and the other in the bottom right of where you want the 3x3 grid.")
+        self.Label['font'] = font.Font(size='12', family='Comic Sans MS')
         self.Label.grid(row=0, column=0, columnspan=2, pady=(5,0))
-        self.AdjustButton = tk.Button(root, text="Adjust", width=15, height=5, command=OpenAdjust)
+
+        self.AdjustButton = tk.Button(root, text="Adjust", height=2, command=OpenAdjust)
+        self.AdjustButton['font'] = myFont
         self.AdjustButton.grid(row=2, column=1, padx=(0,10), sticky=tk.W+tk.E+tk.N+tk.S, pady=(20,0))
-        self.ResetButton = tk.Button(root, text="Reset", width=15, height=5, command=ResetGrid)
+
+        self.ResetButton = tk.Button(root, text="Reset", height=2, command=ResetGrid)
+        self.ResetButton['font'] = myFont
         self.ResetButton.grid(row=3, column=0, padx=(10,0), sticky=tk.W+tk.E+tk.N+tk.S)
-        self.BackButton = tk.Button(root, text="Back", width=15, height=5, command=Back)
+
+        self.BackButton = tk.Button(root, text="Back", height=2, command=Back)
+        self.BackButton['font'] = myFont
         self.BackButton.grid(row=3, column=1, padx=(0,10), sticky=tk.W+tk.E+tk.N+tk.S)
-        self.NextButton = tk.Button(root, text="Next", width=15, height=5, command=Next)
+
+        self.NextButton = tk.Button(root, text="Next", height=2, command=Next)
+        self.NextButton['font'] = myFont
         self.NextButton.grid(row=4, column=0, padx=(10,0), sticky=tk.W+tk.E+tk.N+tk.S, pady=(0,20))
-        self.HelpButton = tk.Button(root, text="Help", width=15, height=5, command=Help)
+
+        self.HelpButton = tk.Button(root, text="Help", height=2, command=Help)
+        self.HelpButton['font'] = myFont
         self.HelpButton.grid(row=4, column=1, padx=(0,10), sticky=tk.W+tk.E+tk.N+tk.S, pady=(0,20))
 
         self.root.mainloop()
