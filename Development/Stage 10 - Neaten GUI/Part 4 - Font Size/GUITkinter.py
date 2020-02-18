@@ -21,6 +21,8 @@ import WebcamList #List of webcams.
 
 from pyautogui import alert #Message box.
 
+import tkinter.font as font
+
 class MainWindow(): #Main Window Class
     def __init__(self, root):
         self.root = root
@@ -138,22 +140,32 @@ class MainWindow(): #Main Window Class
 
         #Threading
         T1 = threading.Thread(target=Webcam) #Thread for Webcam feed
-        T1.daemon = True #Close Webcam if GUi is closed                            
+        T1.daemon = True #Close Webcam if GUi is closed
 
-        self.WebcamSelect = ttk.Combobox(root, width=30, state='readonly',
-                            values=WebcamList.listWebcam())
-        self.WebcamSelect.grid(row=0, column=0, columnspan=2, pady=(20,10))
+        myFont = font.Font(size='26', family='Comic Sans MS')                            
+
+        self.WebcamSelect = ttk.Combobox(root, state='readonly', values=WebcamList.listWebcam())
+        self.WebcamSelect['font'] = font.Font(size='20', family='Comic Sans MS')                   
+        self.WebcamSelect.grid(row=0, column=0, columnspan=2, pady=(20,10), padx=10)
         self.WebcamSelect.current(0) #This sets the displayed value of the ComboBox.
+
         #self.Message = tk.Label(root, text="") #Spare Label to give message to user on input.
         #self.Message.grid(row=1, column=0, columnspan=2)
-        self.DisplayButton = tk.Button(root, text="Open Webcam", width=30, height=5, command=WebcamClick)
-        self.DisplayButton.grid(row=2, column=0, columnspan=2)
-        self.StartStopButton = tk.Button(root, text="Start", width=30, height=5, command=StartStop)
-        self.StartStopButton.grid(row=4, column=0, columnspan=2,
-                            sticky=tk.W+tk.E+tk.N+tk.S, pady=(0,20), padx=10)
-        self.HelpButton = tk.Button(root, text="Help", height=5, command=Help)
+
+        self.DisplayButton = tk.Button(root, text="Open Webcam", height=2, command=WebcamClick)
+        self.DisplayButton['font'] = myFont
+        self.DisplayButton.grid(row=2, column=0, columnspan=2, sticky=tk.W+tk.E+tk.N+tk.S, padx=10)
+
+        self.StartStopButton = tk.Button(root, text="Start", height=2, command=StartStop)
+        self.StartStopButton['font'] = myFont
+        self.StartStopButton.grid(row=4, column=0, columnspan=2, sticky=tk.W+tk.E+tk.N+tk.S, pady=(0,20), padx=10)
+
+        self.HelpButton = tk.Button(root, text="Help", height=2, command=Help)
+        self.HelpButton['font'] = myFont
         self.HelpButton.grid(row=3, column=1, sticky=tk.W+tk.E+tk.N+tk.S, padx=(0,10))
-        self.CalibrateButton = tk.Button(root, text="Calibrate/Setup", height=5, command=CalibrationWindow)
+
+        self.CalibrateButton = tk.Button(root, text="Calibrate/Setup", height=2, command=CalibrationWindow)
+        self.CalibrateButton['font'] = myFont
         self.CalibrateButton.grid(row=3, column=0, sticky=tk.W+tk.E+tk.N+tk.S, padx=(10,0))
 
         self.root.mainloop() #Infinite loop that does not end until the window is closed.
