@@ -178,7 +178,7 @@ class MainCalibration: #Main Calibration Class
         self.root.resizable(0,0) #The window created cannot change size.
 
         self.Label = tk.Label(root, text="Go through Setup before pressing any other button.")
-        self.Label['font'] = myFont
+        self.Label['font'] = font.Font(size='16', family='Comic Sans MS')
         self.Label.grid(row=0, column=0, columnspan=2, pady=(5,10), padx=10)
 
         def SetupWindow(): #Opens Calibration Window.
@@ -198,23 +198,26 @@ class MainCalibration: #Main Calibration Class
 
         def SensitivityWindow(): #Opens Sensitvity window.
             self.SensitivityWindow = tk.Toplevel(self.root)
-            self.Sensitivity = Sensitivity(self.SensitivityWindow)
+            self.Sensitivity = Sensitivity(self.SensitivityWindow)  
 
-        def Debug():
-            print(UpperOne)            
-
-        self.debugButton = tk.Button(root, text="Debug", command=Debug) #Debug button for testing
-        self.debugButton.grid(row=1, column=0, padx=(10,0), sticky=tk.W+tk.E+tk.N+tk.S)    
-
-        self.ConfigureButton = tk.Button(root, text="Configure", width=15, height=5, command=ConfigureWindow)
+        self.ConfigureButton = tk.Button(root, text="Configure", height=2, command=ConfigureWindow)
+        self.ConfigureButton['font'] = myFont
         self.ConfigureButton.grid(row=1, column=1, padx=(0,10), sticky=tk.W+tk.E+tk.N+tk.S)
-        self.SensitivityButton = tk.Button(root, text="Sensitivity", width=15, height=5, command=SensitivityWindow)
+
+        self.SensitivityButton = tk.Button(root, text="Sensitivity", height=2, command=SensitivityWindow)
+        self.SensitivityButton['font'] = myFont
         self.SensitivityButton.grid(row=2, column=0, padx=(10,0), sticky=tk.W+tk.E+tk.N+tk.S)   
-        self.SetupButton = tk.Button(root, text="Setup", width=15, height=5, command=SetupWindow)
+
+        self.SetupButton = tk.Button(root, text="Setup", height=2, command=SetupWindow)
+        self.SetupButton['font'] = myFont
         self.SetupButton.grid(row=2, column=1, padx=(0,10), sticky=tk.W+tk.E+tk.N+tk.S)
-        self.FinishButton = tk.Button(root, text="Finish", width=15, height=5, command=Finish)
+
+        self.FinishButton = tk.Button(root, text="Finish", height=2, command=Finish)
+        self.FinishButton['font'] = myFont
         self.FinishButton.grid(row=3, column=0, padx=(10,0), pady=(0,20), sticky=tk.W+tk.E+tk.N+tk.S)
-        self.HelpButton = tk.Button(root, text="Help", width=15, height=5, command=Help)
+
+        self.HelpButton = tk.Button(root, text="Help", height=2, command=Help)
+        self.HelpButton['font'] = myFont
         self.HelpButton.grid(row=3, column=1, padx=(0,10), pady=(0,20), sticky=tk.W+tk.E+tk.N+tk.S)
 
 class Setup: 
