@@ -415,7 +415,7 @@ class ControlPictureWindow:
         self.TakePictureButton.grid(row=2, column=0, sticky=tk.W+tk.E+tk.N+tk.S, padx=(20,0), pady=(0,20))
 
         self.CountdownLabel = tk.Label(root, text="")
-        self.CountdownLabel['font'] = myFont
+        self.CountdownLabel['font'] = font.Font(size='48', family='Comic Sans MS')
         self.CountdownLabel.grid(row=1, column=0)
 
         self.root.mainloop
