@@ -142,6 +142,7 @@ class MainWindow(): #Main Window Class
         T1 = threading.Thread(target=Webcam) #Thread for Webcam feed
         T1.daemon = True #Close Webcam if GUi is closed
 
+        global myFont
         myFont = font.Font(size='26', family='Comic Sans MS')                            
 
         self.WebcamSelect = ttk.Combobox(root, state='readonly', values=WebcamList.listWebcam())
@@ -174,9 +175,10 @@ class MainCalibration: #Main Calibration Class
     def __init__(self, root):
         self.root = root
         self.root.title("Main Calibration") #Title of the Window.
-        self.root.resizable(0,0) #The window created cannot change size.    
+        self.root.resizable(0,0) #The window created cannot change size.
 
         self.Label = tk.Label(root, text="Go through Setup before pressing any other button.")
+        self.Label['font'] = myFont
         self.Label.grid(row=0, column=0, columnspan=2, pady=(5,10), padx=10)
 
         def SetupWindow(): #Opens Calibration Window.
