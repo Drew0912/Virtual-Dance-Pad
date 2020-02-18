@@ -303,44 +303,70 @@ class Adjust:
 
         def ResetGrid():
             cameraFeed.Reset()
-            alert(text='The webcam feed has been reset.', title='Reset', button='OK')    
+            alert(text='The webcam feed has been reset.', title='Reset', button='OK')
+
+        self.adjustFont = font.Font(size='16', family='Comic Sans MS')        
 
         #First Corner
         self.FirstLabel = tk.Label(root, text="Top Left Corner:")
+        self.FirstLabel['font'] = self.adjustFont
         self.FirstLabel.grid(row=0, column=0, columnspan=4, padx=10, pady=10, sticky=tk.W+tk.S)
 
-        self.LeftIncreaseY = tk.Button(root, text="UP", width=12, height=3, command=LeftCornerUp)
-        self.LeftIncreaseY.grid(row=1, column=0, padx=(10,0))
-        self.LeftDecreaseY = tk.Button(root, text="DOWN", width=12, height=3, command=LeftCornerDown)
-        self.LeftDecreaseY.grid(row=1, column=1)
-        self.LeftIncreaseX = tk.Button(root, text="RIGHT", width=12, height=3, command=LeftCornerRight)
-        self.LeftIncreaseX.grid(row=1, column=2)
-        self.LeftDecreaseX = tk.Button(root, text="LEFT", width=12, height=3, command=LeftCornerLeft)
-        self.LeftDecreaseX.grid(row=1, column=3, padx=(0,10))
+        self.LeftIncreaseY = tk.Button(root, text="UP", command=LeftCornerUp)
+        self.LeftIncreaseY['font'] = myFont
+        self.LeftIncreaseY.grid(row=1, column=0, padx=(10,0), sticky=tk.W+tk.E+tk.N+tk.S)
+
+        self.LeftDecreaseY = tk.Button(root, text="DOWN", command=LeftCornerDown)
+        self.LeftDecreaseY['font'] = myFont
+        self.LeftDecreaseY.grid(row=1, column=1, sticky=tk.W+tk.E+tk.N+tk.S)
+
+        self.LeftIncreaseX = tk.Button(root, text="RIGHT", command=LeftCornerRight)
+        self.LeftIncreaseX['font'] = myFont
+        self.LeftIncreaseX.grid(row=1, column=2, sticky=tk.W+tk.E+tk.N+tk.S)
+
+        self.LeftDecreaseX = tk.Button(root, text="LEFT", command=LeftCornerLeft)
+        self.LeftDecreaseX['font'] = myFont
+        self.LeftDecreaseX.grid(row=1, column=3, padx=(0,10), sticky=tk.W+tk.E+tk.N+tk.S)
+
 
         #Second Corner
         self.SecondLabel = tk.Label(root, text="Bottom Right Corner:")
+        self.SecondLabel['font'] = self.adjustFont
         self.SecondLabel.grid(row=2, column=0, columnspan=4, padx=10, pady=10, sticky=tk.W+tk.S)
 
-        self.RightIncreaseY = tk.Button(root, text="UP", width=12, height=3, command=RightCornerUp)
-        self.RightIncreaseY.grid(row=3, column=0, padx=(10,0))
-        self.RightDecreaseY = tk.Button(root, text="DOWN", width=12, height=3, command=RightCornerDown)
-        self.RightDecreaseY.grid(row=3, column=1)
-        self.RightIncreaseX = tk.Button(root, text="RIGHT", width=12, height=3, command=RightCornerRight)
-        self.RightIncreaseX.grid(row=3, column=2)
-        self.RightDecreaseX = tk.Button(root, text="LEFT", width=12, height=3, command=RightCornerLeft)
-        self.RightDecreaseX.grid(row=3, column=3, padx=(0,10))
+        self.RightIncreaseY = tk.Button(root, text="UP", command=RightCornerUp)
+        self.RightIncreaseY['font'] = myFont
+        self.RightIncreaseY.grid(row=3, column=0, padx=(10,0), sticky=tk.W+tk.E+tk.N+tk.S)
 
+        self.RightDecreaseY = tk.Button(root, text="DOWN", command=RightCornerDown)
+        self.RightDecreaseY['font'] = myFont
+        self.RightDecreaseY.grid(row=3, column=1, sticky=tk.W+tk.E+tk.N+tk.S)
+
+        self.RightIncreaseX = tk.Button(root, text="RIGHT", command=RightCornerRight)
+        self.RightIncreaseX['font'] = myFont
+        self.RightIncreaseX.grid(row=3, column=2, sticky=tk.W+tk.E+tk.N+tk.S)
+
+        self.RightDecreaseX = tk.Button(root, text="LEFT", command=RightCornerLeft)
+        self.RightDecreaseX['font'] = myFont
+        self.RightDecreaseX.grid(row=3, column=3, padx=(0,10), sticky=tk.W+tk.E+tk.N+tk.S)
+
+        #Message
         self.ResetMessage = tk.Label(root, text="Press the reset button to remove the 3x3 grid.")
+        self.ResetMessage['font'] = self.adjustFont
         self.ResetMessage.grid(row=4, column=0, columnspan=4, pady=(10,0))
 
         #Buttons
-        self.ResetButton = tk.Button(root, text="Reset", width=24, height=3, command=ResetGrid)
-        self.ResetButton.grid(row=5, column=0, columnspan=2)
-        self.HelpButton = tk.Button(root, text="Help", width=12, height=3, command=Help)
-        self.HelpButton.grid(row=5, column=2, pady=10)
-        self.BackButton = tk.Button(root, text="Back", width=12, height=3, command=Back)
-        self.BackButton.grid(row=5, column=3, pady=10, padx=(0,10))
+        self.ResetButton = tk.Button(root, text="Reset", command=ResetGrid)
+        self.ResetButton['font'] = myFont
+        self.ResetButton.grid(row=5, column=0, columnspan=2, sticky=tk.W+tk.E+tk.N+tk.S, pady=10, padx=(10,0))
+
+        self.HelpButton = tk.Button(root, text="Help", command=Help)
+        self.HelpButton['font'] = myFont
+        self.HelpButton.grid(row=5, column=2, pady=10, sticky=tk.W+tk.E+tk.N+tk.S)
+
+        self.BackButton = tk.Button(root, text="Back", command=Back)
+        self.BackButton['font'] = myFont
+        self.BackButton.grid(row=5, column=3, pady=10, padx=(0,10), sticky=tk.W+tk.E+tk.N+tk.S)
 
 class ControlPictureWindow:
     def __init__(self, root):
