@@ -399,15 +399,23 @@ class ControlPictureWindow:
                     TakePicture()    
   
         self.Label = tk.Label(root, text="Makes sure that the image displayed on the webcam feed\n is clear and that the user is standing on the center box of the 3x3 grid.")
+        self.Label['font'] = font.Font(size='16', family='Comic Sans MS')
         self.Label.grid(row=0, column=0, columnspan=2, pady=10, padx=10)
-        self.BackButton = tk.Button(root, text="Back", width=15, height=5, command=Back)
+
+        self.BackButton = tk.Button(root, text="Back", height=2, command=Back)
+        self.BackButton['font'] = myFont
         self.BackButton.grid(row=1, column=1, sticky=tk.W+tk.E+tk.N+tk.S, padx=(0,20))
-        self.HelpButton = tk.Button(root, text="Help", width=15, height=5, command=Help)
+
+        self.HelpButton = tk.Button(root, text="Help", height=2, command=Help)
+        self.HelpButton['font'] = myFont
         self.HelpButton.grid(row=2, column=1, sticky=tk.W+tk.E+tk.N+tk.S, padx=(0,20), pady=(0,20))
-        self.TakePictureButton = tk.Button(root, text="Take Picture", width=15, height=5, command=Countdown)
+
+        self.TakePictureButton = tk.Button(root, text="Take Picture", height=2, command=Countdown)
+        self.TakePictureButton['font'] = myFont
         self.TakePictureButton.grid(row=2, column=0, sticky=tk.W+tk.E+tk.N+tk.S, padx=(20,0), pady=(0,20))
 
         self.CountdownLabel = tk.Label(root, text="")
+        self.CountdownLabel['font'] = myFont
         self.CountdownLabel.grid(row=1, column=0)
 
         self.root.mainloop
