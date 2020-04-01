@@ -398,7 +398,7 @@ class ControlPictureWindow:
                 elif self.count == 0:
                     TakePicture()    
   
-        self.Label = tk.Label(root, text="Makes sure that the image displayed on the webcam feed\n is clear and that the user is standing on the center box of the 3x3 grid.")
+        self.Label = tk.Label(root, text="Make sure that the image displayed on the webcam feed\n is clear and that the user is standing on the center box of the 3x3 grid.")
         self.Label['font'] = font.Font(size='16', family='Comic Sans MS')
         self.Label.grid(row=0, column=0, columnspan=2, pady=10, padx=10)
 
