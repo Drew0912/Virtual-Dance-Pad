@@ -23,7 +23,7 @@ class VidCapture:
 
     def showFrame(self):
         ret, frame = self.vid.read() #Gets data from webcam.
-        frame = cv2.flip(frame, 1) #Flips the frame data vertically from webcam.
+        frame = cv2.flip(frame, 1) #Flips the frame data horizontally from webcam.
 
         if self.point1 and self.point2:
             cv2.rectangle(frame, self.point1, self.point2, (255,255,255)) #Draws Rectangle, colour white.
