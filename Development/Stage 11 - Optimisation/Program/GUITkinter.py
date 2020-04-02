@@ -238,8 +238,7 @@ class Setup:
             self.Adjust = Adjust(self.AdjustWindow)
 
         def Next():
-            if cameraFeed.drawingfinish == True:
-                print("debug")
+            if cameraFeed.drawingfinish == True: #3x3 grid must be drawn. 
                 self.ControlWindow = tk.Toplevel(self.root)
                 self.Control = ControlPictureWindow(self.ControlWindow)
             else:
