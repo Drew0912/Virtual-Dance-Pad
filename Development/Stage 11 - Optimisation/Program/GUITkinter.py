@@ -50,16 +50,23 @@ class MainWindow(): #Main Window Class
         self.FourPress = False
 
         #Validation boolean values
-        global SetupFinished
+        global SetupFinished, SensitivityFinished
         SetupFinished = False
+        SensitivityFinished = False
+
 
         def StartStop(): #Changes text of Button when pressed.
             if self.StartStopButton["text"] == "Start":
-                self.Started = True
-                self.StartStopButton["text"] = "Stop"
+                if SensitivityFinished == True:
+                    self.Started = True
+                    self.StartStopButton["text"] = "Stop"
+                    print("Started")
+                else:
+                    alert(text="Setup Sensitivity first.", title="Start", button="OK")    
             else:
                 self.Started = False
                 self.StartStopButton["text"] = "Start"
+                print("Stopped")
 
         def Help(): #Opens HTML file.
             url = 'file://' + os.path.realpath('Help.html')
@@ -651,6 +658,8 @@ class Sensitivity:
                     alert(text='Value in Lower limit for box four is not between 1 and 0', title='Validation', button='OK')
             else:
                 alert(text='Value in Lower limit for box four is not a real number', title='Validation', button='OK')
+            global SensitivityFinished
+            SensitivityFinished = True    
 
         #Second row Labels
         self.DetectionLabel = tk.Label(root, text="Detection Value:")
