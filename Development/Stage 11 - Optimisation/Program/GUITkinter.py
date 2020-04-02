@@ -238,8 +238,12 @@ class Setup:
             self.Adjust = Adjust(self.AdjustWindow)
 
         def Next():
-            self.ControlWindow = tk.Toplevel(self.root)
-            self.Control = ControlPictureWindow(self.ControlWindow)
+            if cameraFeed.drawingfinish == True:
+                print("debug")
+                self.ControlWindow = tk.Toplevel(self.root)
+                self.Control = ControlPictureWindow(self.ControlWindow)
+            else:
+                alert(text="Create the 3x3 grid first.", title="3x3 Grid", button="OK")    
 
         def ResetGrid():
             cameraFeed.Reset()
