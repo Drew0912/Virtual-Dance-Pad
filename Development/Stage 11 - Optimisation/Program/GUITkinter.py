@@ -49,6 +49,10 @@ class MainWindow(): #Main Window Class
         self.ThreePress = False
         self.FourPress = False
 
+        #Validation boolean values
+        global SetupFinished
+        SetupFinished = False
+
         def StartStop(): #Changes text of Button when pressed.
             if self.StartStopButton["text"] == "Start":
                 self.Started = True
@@ -197,8 +201,11 @@ class MainCalibration: #Main Calibration Class
             self.Configure = Configure(self.ConfigureWindow)
 
         def SensitivityWindow(): #Opens Sensitvity window.
-            self.SensitivityWindow = tk.Toplevel(self.root)
-            self.Sensitivity = Sensitivity(self.SensitivityWindow)  
+            if SetupFinished == True:
+                self.SensitivityWindow = tk.Toplevel(self.root)
+                self.Sensitivity = Sensitivity(self.SensitivityWindow)
+            else:
+                alert(text="Finish the setup process first.", title="Setup", button="OK")      
 
         self.ConfigureButton = tk.Button(root, text="Configure", height=2, command=ConfigureWindow)
         self.ConfigureButton['font'] = myFont
@@ -447,6 +454,8 @@ class ControlPictureConfirmWindow:
             self.TextLabel["text"] = "Close all windows but Main Calibration and Main Window"
             cameraFeed.CropControl()
             cameraFeed.SetupFinishBool()
+            global SetupFinished
+            SetupFinished = not SetupFinished
 
         self.fontSize = font.Font(size='18', family='Comic Sans MS')            
 
