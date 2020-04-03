@@ -2,8 +2,8 @@
 #Andrew Lee
 #File name: Comparison.py
 #-------------------------------------------
-#
-#
+
+
 #Imports
 import numpy as np #Additional maths functions
 import cv2 #OpenCV
@@ -25,4 +25,3 @@ def main():
 
 if __name__ == "__main__":
     main() 
-           

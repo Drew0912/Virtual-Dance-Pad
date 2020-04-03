@@ -4,11 +4,11 @@
 #-------------------------------------------
 
 #Check if value is a float/real function
-
 def CheckFloat(s):
     try:
         float(s)
         return True
     except ValueError:
         return False      
-              
+
+""" aklshdah """
