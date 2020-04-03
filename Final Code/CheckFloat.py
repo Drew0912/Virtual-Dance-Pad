@@ -10,5 +10,3 @@ def CheckFloat(s):
         return True
     except ValueError:
         return False      
-
-""" aklshdah """
