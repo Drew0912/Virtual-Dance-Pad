@@ -1,4 +1,11 @@
-import cv2
+#-------------------------------------------
+#Andrew Lee
+#File name: WebcamCV2.py
+#-------------------------------------------
+
+
+#Imports
+import cv2 #OpenCV
 import numpy as np
 
 def listWebcam():

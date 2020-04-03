@@ -1,6 +1,11 @@
+#-------------------------------------------
+#Andrew Lee
+#File name: WebcamCV2.py
+#-------------------------------------------
+
+#Imports
 import cv2 #Imports OpenCV.
 import numpy as np #Numpy is needed for OpenCV.
-
 import Comparison #Comparison algorithms
 
 class VidCapture:
@@ -9,11 +14,10 @@ class VidCapture:
 
         self.point1 = () #Tuple for first coordinate.
         self.point2 = () #Tuple for second coordinate.
+
         self.drawing = False #Boolean to know if user is drawing the rectangle.
-        self.drawingfinish = False
-
+        self.drawingfinish = False #Boolean to tell if the 3x3 grid is finished
         self.takepicture = False #Boolean flag for if picture is taken.
-
         self.setupfinish = False #Boolean flag for if setup is finished.
 
         #self.n = 0 #Counter for frames
@@ -25,7 +29,7 @@ class VidCapture:
         ret, frame = self.vid.read() #Gets data from webcam.
         frame = cv2.flip(frame, 1) #Flips the frame data horizontally from webcam.
 
-        if self.point1 and self.point2:
+        if self.point1 and self.point2: #If both points exist
             cv2.rectangle(frame, self.point1, self.point2, (255,255,255)) #Draws Rectangle, colour white.
 
             self.xlength = abs(self.point1[0] - self.point2[0]) #Horizontal Length
@@ -51,6 +55,7 @@ class VidCapture:
         if self.drawingfinish and self.setupfinish: #if setup and drawing are finished.
             #self.n = self.n + 1
 
+            #Cropping webcam feed
             self.frameCrop1 = frame[self.point1[1] + 1:self.c, self.a + 1:self.b]
             #cropname1 = "one " + str(self.n) + ".jpg"
             #cv2.imwrite(cropname1, self.frameCrop1)
@@ -67,7 +72,7 @@ class VidCapture:
             #cropname4 = "four " + str(self.n) + ".jpg"
             #cv2.imwrite(cropname4, self.frameCrop4)
             
-
+            #Does comparison algorithm
             self.one = Comparison.ssim(self.imCrop1, self.frameCrop1)
             #print("one: " + str(self.one))
 
@@ -79,7 +84,6 @@ class VidCapture:
 
             self.four = Comparison.ssim(self.imCrop4, self.frameCrop4)
             #print("four: " + str(self.four))
-
 
         cv2.imshow(self.Name, frame) #Creates window called WebcamFeed and displays frame from webcam.
 
@@ -101,6 +105,7 @@ class VidCapture:
         if event == cv2.EVENT_RBUTTONDOWN: #Temp Function.
             self.Reset()
 
+    #Reset function
     def Reset(self): #Reset Rectangle and allow drawing again.
         global point1, point2, drawing, drawingfinish
         self.point1 = ()
@@ -108,6 +113,7 @@ class VidCapture:
         self.drawing = False
         self.drawingfinish = False
 
+    #Functions to change location of 2 main points
     def LeftCornerUp(self):
         global point1
         self.point1 = (self.point1[0], self.point1[1] - 1)
@@ -133,10 +139,12 @@ class VidCapture:
         global point2
         self.point2 = (self.point2[0] + 1, self.point2[1])    
 
+    #Function to take control picture
     def TakePicture(self):
         self.takepicture = not self.takepicture
 
-    def CropControl(self): #Crop Control Picture.
+    #Crops Control Picture.
+    def CropControl(self): 
         im = cv2.imread("Control_picture.jpg") #Imports control picture.
 
         self.imCrop1 = im[self.point1[1] + 1:self.c, self.a + 1:self.b]
