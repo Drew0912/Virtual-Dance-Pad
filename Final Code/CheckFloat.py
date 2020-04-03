@@ -3,6 +3,7 @@
 #File name: CheckFloat.py
 #-------------------------------------------
 
+
 #Check if value is a float/real function
 def CheckFloat(s):
     try:

@@ -1,29 +1,27 @@
+#-------------------------------------------
+#Andrew Lee
+#File name: GUITkinter.py
+#-------------------------------------------
+
+
+#Imports
 import tkinter as tk #Imports Tkinter under the name tk.
 from tkinter import ttk #ComboBox Widget is part of ttk module in Tkinter.
-
-from tkinter import StringVar
-
-import webbrowser, os #Open browser
-
-import CheckFloat #CheckFloat function
-import WebcamCV2 #Webcam feed python file
-
-import threading #Python Threading module
-import cv2 #OpenCV
-
-from PIL import Image, ImageTk #Python Imaging Library
-
-import time #Time functions
-
+from tkinter import StringVar #Tkinter string variable.
+import webbrowser, os #Open web browser.
+import CheckFloat #CheckFloat function.
+import WebcamCV2 #Webcam feed python file.
+import threading #Python Threading module.
+import cv2 #OpenCV.
+from PIL import Image, ImageTk #Python Imaging Library.
+import time #Time functions.
 from pyautogui import keyDown, keyUp #Keyboard inputs.
-
 import WebcamList #List of webcams.
-
 from pyautogui import alert #Message box.
+import tkinter.font as font #Font variable.
 
-import tkinter.font as font
-
-class MainWindow(): #Main Window Class
+#Main Window Class
+class MainWindow():
     def __init__(self, root):
         self.root = root
         self.root.title("Main Window") #Title of the Window.
@@ -42,40 +40,43 @@ class MainWindow(): #Main Window Class
         LowerThree = "Set Value"
         LowerFour = "Set Value"
 
-        self.Started = False
+        self.Started = False #Boolean to tell if the program has been started.
 
+        #Boolean values for if a key is pressed down or not.
         self.OnePress = False
         self.TwoPress = False
         self.ThreePress = False
         self.FourPress = False
 
-        #Validation boolean values
+        #Validation boolean values.
         global SetupFinished, SensitivityFinished
         SetupFinished = False
         SensitivityFinished = False
 
-
-        def StartStop(): #Changes text of Button when pressed.
+        #Start/Stop button function
+        def StartStop():
             if self.StartStopButton["text"] == "Start":
                 if SensitivityFinished == True:
                     self.Started = True
                     self.StartStopButton["text"] = "Stop"
-                    print("Started")
+                    #print("Started")
                 else:
-                    alert(text="Setup Sensitivity first.", title="Start", button="OK")    
+                    alert(text="Setup Sensitivity first.", title="Start", button="OK") #Message box    
             else:
                 self.Started = False
                 self.StartStopButton["text"] = "Start"
-                print("Stopped")
+                #print("Stopped")
 
-        def Help(): #Opens HTML file.
+        #Help button function
+        def Help(): 
             url = 'file://' + os.path.realpath('Help.html')
-            webbrowser.open(url)
+            webbrowser.open(url) #Opens HTML file.
 
-        def CalibrationWindow(): #Open Main Calibration window
+        #Calibration/Setup button function
+        def CalibrationWindow(): 
             if self.WebcamOpen:
                 self.newwindow = tk.Toplevel(self.root)
-                self.app = MainCalibration(self.newwindow)
+                self.app = MainCalibration(self.newwindow) #Open Main Calibration window
             else:
                 #self.Message["text"] = "Open Webcam first."
                 alert(text='Open Webcam first.', title='Webcam', button='OK') #Message box.   
@@ -88,9 +89,12 @@ class MainWindow(): #Main Window Class
             global close
             close = False
             while(True):
-                cameraFeed.showFrame()
+                cameraFeed.showFrame() #showFrame function from webcam feed python file.
 
-                if self.Started: #Main box 1. Back
+                #Keyboard marcros
+
+                #Main box 1. Back
+                if self.Started: 
                     if cameraFeed.one >= float(LowerOne) and cameraFeed.one <= float(UpperOne) and not self.OnePress:
                         keyDown('s')
                         self.OnePress = not self.OnePress
@@ -99,16 +103,18 @@ class MainWindow(): #Main Window Class
                             keyUp('s')
                             self.OnePress = not self.OnePress
 
-                if self.Started: #Main box 2. Left
+                #Main box 2. Right            
+                if self.Started: 
                     if cameraFeed.two >= float(LowerTwo) and cameraFeed.two <= float(UpperTwo) and not self.TwoPress:
-                        keyDown('a')
+                        keyDown('d')
                         self.TwoPress = not self.TwoPress
                     elif self.TwoPress:
                         if cameraFeed.two < float(LowerTwo) or cameraFeed.two > float(UpperTwo):
-                            keyUp('a')
+                            keyUp('d')
                             self.TwoPress = not self.TwoPress
 
-                if self.Started: #Main box 3. Front
+                #Main box 3. Front
+                if self.Started: 
                     if cameraFeed.three >= float(LowerThree) and cameraFeed.three <= float(UpperThree) and not self.ThreePress:
                         keyDown('w')
                         self.ThreePress = not self.ThreePress
@@ -117,15 +123,15 @@ class MainWindow(): #Main Window Class
                             keyUp('w')
                             self.ThreePress = not self.ThreePress
 
-                if self.Started: #Main box 4. Right
+                #Main box 4. Left
+                if self.Started: 
                     if cameraFeed.four >= float(LowerFour) and cameraFeed.four <= float(UpperFour) and not self.FourPress:
-                        keyDown('d')
+                        keyDown('a')
                         self.FourPress = not self.FourPress
                     elif self.FourPress:
                         if cameraFeed.four < float(LowerFour) or cameraFeed.four > float(UpperFour):
-                            keyUp('d')
+                            keyUp('a')
                             self.FourPress = not self.FourPress                                     
-
 
                 if cv2.waitKey(20) == 27: #Press esc to exit.
                     self.WebcamOpen = not self.WebcamOpen
@@ -148,14 +154,15 @@ class MainWindow(): #Main Window Class
                 close = not close
                 self.DisplayButton["text"] = "Open Webcam"
 
-
         #Threading
         T1 = threading.Thread(target=Webcam) #Thread for Webcam feed
         T1.daemon = True #Close Webcam if GUi is closed
 
+        #Global font variable
         global myFont
         myFont = font.Font(size='26', family='Comic Sans MS')                            
 
+        #Webcam drop down menu
         self.WebcamSelect = ttk.Combobox(root, state='readonly', values=WebcamList.listWebcam())
         self.WebcamSelect['font'] = font.Font(size='20', family='Comic Sans MS')                   
         self.WebcamSelect.grid(row=0, column=0, columnspan=2, pady=(20,10), padx=10)
@@ -164,25 +171,30 @@ class MainWindow(): #Main Window Class
         #self.Message = tk.Label(root, text="") #Spare Label to give message to user on input.
         #self.Message.grid(row=1, column=0, columnspan=2)
 
+        #Open Webcam button
         self.DisplayButton = tk.Button(root, text="Open Webcam", height=2, command=WebcamClick)
         self.DisplayButton['font'] = myFont
         self.DisplayButton.grid(row=2, column=0, columnspan=2, sticky=tk.W+tk.E+tk.N+tk.S, padx=10)
 
+        #Start/Stop button
         self.StartStopButton = tk.Button(root, text="Start", height=2, command=StartStop)
         self.StartStopButton['font'] = myFont
         self.StartStopButton.grid(row=4, column=0, columnspan=2, sticky=tk.W+tk.E+tk.N+tk.S, pady=(0,20), padx=10)
 
+        #Help button
         self.HelpButton = tk.Button(root, text="Help", height=2, command=Help)
         self.HelpButton['font'] = myFont
         self.HelpButton.grid(row=3, column=1, sticky=tk.W+tk.E+tk.N+tk.S, padx=(0,10))
 
+        #Calibrate/Setup button
         self.CalibrateButton = tk.Button(root, text="Calibrate/Setup", height=2, command=CalibrationWindow)
         self.CalibrateButton['font'] = myFont
         self.CalibrateButton.grid(row=3, column=0, sticky=tk.W+tk.E+tk.N+tk.S, padx=(10,0))
 
         self.root.mainloop() #Infinite loop that does not end until the window is closed.
 
-class MainCalibration: #Main Calibration Class
+#Main Calibration Class
+class MainCalibration: 
     def __init__(self, root):
         self.root = root
         self.root.title("Main Calibration") #Title of the Window.
