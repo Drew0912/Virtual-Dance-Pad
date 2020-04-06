@@ -24,7 +24,9 @@
 <a href="#Control Picture">Control Picture</a><br>
 <a href="#Interacting with Stepmania">Interacting with Stepmania</a><br>
 <a href="#Configuring Stepmania">Configuring Stepmania</a><br>
+<a href="#Judging Difficulty">Judging Difficulty</a><br>
 <a href="#FAQ">FAQ</a><br>
+<a href="#Known Issues">Known Issues</a><br>
 
 
 <a name="About">
@@ -189,10 +191,11 @@ Configure Window</font></a><font size="2"> (<a href="#Table of Contents">top</a>
 <br>
 Use this window to set which arrow each of the 4 main boxes will press.<br>
 By default:<br>
-* Box 1 is Front<br>
-* Box 2 is Left<br>
-* Box 3 is Back<br>
-* Box 4 is Right<br>
+* Box 1 is Back<br>
+* Box 2 is Right<br>
+* Box 3 is Up<br>
+* Box 4 is Left<br>
+Where each box is on the 3x3 grid is shown under the 'Creating Virtual Dance Pad' heading.<br>
 <br>
 
 
@@ -216,10 +219,12 @@ The numbers in the drop down menu will mean the same webcam after closing and re
 Creating Virtual Dance Pad</font></a><font size="2"> (<a href="#Table of Contents">Top</a>)</font><hr>
 <font size="2">
 <br>
-To create the virtual dance pad, left click on the webcam feed to create one corner. Then left click to create the opposite corner and therefore 3x3 grid.<br>
-Make sure that the first corner is the top left corner of the virtual dance pad.<br>
+To create the Virtual Dance Pad, left click on the webcam feed to create one corner. Then left click to create the opposite corner and therefore 3x3 grid.<br>
+Make sure that the first corner is the top left corner of the Virtual Dance Pad.<br>
 Press the "Reset" button in the GUI to reset any corners made.<br>
-The size of the virtual dance pad can be changed without resetting by using the Adjust window.<br>
+The size of the Virtual Dance Pad can be changed without resetting by using the Adjust window.<br>
+The 4 main boxes of the Virtual Dance Pad used for arrow inputs have been highlighted below with labels: <br>
+<img src="3x3 Diagram.png" alt="3x3 grid diagram.">
 <br>
 
 <a name="Control Picture">
@@ -267,6 +272,19 @@ Option two:<br>
 Copy the "Keymaps.ini" file from the folder with the program to the saves folder for Stepmania. The saves folder will be in the games directory or in the users appdata.<br>
 <br>
 
+<a name="Judging Difficulty">
+<font face="Courier New" size="2">
+<hr></font>
+<font size="3">
+Judging Difficulty</font></a><font size="2"> (<a href="#Table of Contents">top</a>)</font><hr>
+<font size="2">
+<br>
+Changing the Judging Difficulty will change the size of the timing window meaning that there can be more time in which pressing an arrow is correct.<br>
+To change this, open the setting menu from the start and open Advanced Option. You should see an option called Judge Difficulty.<br>
+Setting this to a lower value will increase the size of the timint window. Recommended value is 1.<br>
+Default Fail Type can also be changed here. This is what happens when the player runs out of life. Details on what each option does is displayed in game.<br>
+<br>
+
 <a name="FAQ">
 <font face="Courier New" size="2">
 <hr></font>
@@ -275,6 +293,17 @@ FAQ</font></a><font size="2"> (<a href="#Table of Contents">top</a>)</font><hr>
 <font size="2">
 <br>
 Add info...<br>
+<br>
+
+<a name="Known Issues">
+<font face="Courier New" size="2">
+<hr></font>
+<font size="3">
+Known Issues</font></a><font size="2"> (<a href="#Table of Contents">top</a>)</font><hr>
+<font size="2">
+<br>
+Moving the Main window before closing the alert window telling the user to open the webcam first results in the program crashing.<br>
+Moving the mouse cursor to one of the corners of the display with the webcam feed closes the webcam feed.<br>
 <br>
 
 <hr>

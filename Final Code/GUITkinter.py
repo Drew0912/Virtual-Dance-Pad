@@ -457,12 +457,12 @@ class ControlPictureWindow:
 
         #Countdown function
         def Countdown():
-                self.count = self.count - 1 #Starts at 5
-                self.CountdownLabel.config(text=str(self.count)) #Updates countdown text.
-                if self.count > 0:
-                    self.CountdownLabel.after(1000,Countdown) #Repeat function every second.
-                elif self.count == 0:
-                    TakePicture() #Run TakePicture function   
+            self.count = self.count - 1 #Starts at 5
+            self.CountdownLabel.config(text=str(self.count)) #Updates countdown text.
+            if self.count > 0:
+                self.CountdownLabel.after(1000,Countdown) #Repeat function every second.
+            elif self.count == 0:
+                TakePicture() #Run TakePicture function   
 
         ##Label with info
         self.Label = tk.Label(root, text="Make sure that the image displayed on the webcam feed\n is clear and that the user is standing on the center box of the 3x3 grid.")
